@@ -8,18 +8,7 @@ import {
   Tooltip,
   Legend,
 } from 'recharts';
-
-const STATUS_COLORS: Record<string, string> = {
-  'Accepted Invite': '#14F287',
-  'Awaiting Response': '#805FF4',
-  'Blacklisted': '#555',
-  'Call Postponed': '#4FC3F7',
-  'Called Declined': '#BE7C43',
-  'Email Sent': '#7C57E6',
-  'Emailed Declined': '#F44336',
-  'Not Reachable': '#9C27B0',
-  'Wrong Number': '#FF9800',
-};
+import { STATUS_COLORS } from '@/lib/statusColors';
 
 export default function ContactsPerMember({ data }: { data: any[] }) {
   const grouped: any = {};

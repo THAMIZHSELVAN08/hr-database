@@ -2,8 +2,10 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { useSidebarStore } from '@/lib/sidebarStore';
-import { Home, Search, Plus, Bell, BarChart3, Menu } from 'lucide-react';
+import { useThemeStore } from '@/lib/themeStore';
+import { Home, Search, Plus, Bell, BarChart3, Menu, Sun, Moon } from 'lucide-react';
 import StatsModal from './StatsModal';
 
 interface TopBarProps {
@@ -23,10 +25,19 @@ interface TopBarProps {
 
 export default function TopBar({ username, stats }: TopBarProps) {
   const { toggle } = useSidebarStore();
+  const { isDarkMode, toggle: toggleTheme } = useThemeStore();
   const [showStatsModal, setShowStatsModal] = useState(false);
   const [unreadCount, setUnreadCount] = useState(0);
   const [userEmail, setUserEmail] = useState<string>('');
   const [userRole, setUserRole] = useState<string>('');
+
+  useEffect(() => {
+    if (isDarkMode) {
+      document.documentElement.classList.add('dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+    }
+  }, [isDarkMode]);
 
   useEffect(() => {
     const fetchUserInfo = async () => {
@@ -75,25 +86,33 @@ export default function TopBar({ username, stats }: TopBarProps) {
   return (
     <>
       <div
-        className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-8 py-5 bg-white dark:bg-[#0B0F05] border-b border-gray-200 dark:border-gray-800 shadow-sm"
+        className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-8 py-5 bg-card border-b border-border shadow-sm"
         style={{ fontFamily: 'Segoe UI, -apple-system, BlinkMacSystemFont, sans-serif' }}
       >
         <div className="flex items-center gap-4">
           <button
             onClick={toggle}
-            className="p-2.5 text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg transition-all"
+            className="p-2.5 text-muted-foreground hover:text-card-foreground hover:bg-accent rounded-lg transition-all"
             title="Toggle Menu"
           >
             <Menu className="w-6 h-6" />
           </button>
 
-          <span className="font-bold text-gray-900 dark:text-white text-base">
+          <span className="font-semibold text-card-foreground text-lg md:text-xl">
             Hello, <span className="font-bold">{username}</span>
           </span>
         </div>
 
-        <div className="absolute left-1/2 transform -translate-x-1/2">
-          <h1 className="text-2xl font-bold text-gray-900 dark:text-white tracking-tight">
+        <div className="absolute left-1/2 -translate-x-1/2 flex items-center gap-4">
+          <Image
+            src="/forese-logo-small.png"
+            alt="FORESE Logo"
+            width={47}
+            height={47}
+            className="h-14 w-auto"
+            priority
+          />
+          <h1 className="text-2xl font-bold text-card-foreground tracking-tight">
             HR DATABASE
           </h1>
         </div>
@@ -103,7 +122,7 @@ export default function TopBar({ username, stats }: TopBarProps) {
             <>
               <Link
                 href="/dashboard"
-                className="p-2.5 text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg transition-all"
+                className="p-2.5 text-muted-foreground hover:text-card-foreground hover:bg-accent rounded-lg transition-all"
                 title="Dashboard"
               >
                 <Home className="w-6 h-6" />
@@ -111,7 +130,7 @@ export default function TopBar({ username, stats }: TopBarProps) {
 
               <Link
                 href="/search"
-                className="p-2.5 text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg transition-all"
+                className="p-2.5 text-muted-foreground hover:text-card-foreground hover:bg-accent rounded-lg transition-all"
                 title="Search"
               >
                 <Search className="w-6 h-6" />
@@ -119,7 +138,7 @@ export default function TopBar({ username, stats }: TopBarProps) {
 
               <Link
                 href="/add"
-                className="p-2.5 text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg transition-all"
+                className="p-2.5 text-muted-foreground hover:text-card-foreground hover:bg-accent rounded-lg transition-all"
                 title="Add New"
               >
                 <Plus className="w-6 h-6" />
@@ -127,7 +146,7 @@ export default function TopBar({ username, stats }: TopBarProps) {
 
               <Link
                 href="/notifications"
-                className="relative p-2.5 text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg transition-all"
+                className="relative p-2.5 text-muted-foreground hover:text-card-foreground hover:bg-accent rounded-lg transition-all"
                 title="Notifications"
               >
                 <Bell className="w-6 h-6" />
@@ -141,7 +160,7 @@ export default function TopBar({ username, stats }: TopBarProps) {
 
               <button
                 onClick={() => setShowStatsModal(true)}
-                className="p-2.5 text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg transition-all"
+                className="p-2.5 text-muted-foreground hover:text-card-foreground hover:bg-accent rounded-lg transition-all"
                 title="Statistics"
               >
                 <BarChart3 className="w-6 h-6" />
@@ -149,10 +168,21 @@ export default function TopBar({ username, stats }: TopBarProps) {
             </>
           )}
 
-          <div className="ml-2 pl-2 border-l border-gray-200 dark:border-gray-700">
+          <div className="ml-2 pl-2 border-l border-border flex items-center gap-2">
+            <button
+              onClick={toggleTheme}
+              className="p-2.5 text-muted-foreground hover:text-card-foreground hover:bg-accent rounded-lg transition-all"
+              title={isDarkMode ? 'Switch to Light Mode' : 'Switch to Dark Mode'}
+            >
+              {isDarkMode ? (
+                <Sun className="w-6 h-6" />
+              ) : (
+                <Moon className="w-6 h-6" />
+              )}
+            </button>
             <Link
               href="/pitch"
-              className="px-4 py-2 text-base font-semibold text-blue-600 dark:text-blue-400 border border-blue-600 dark:border-blue-500 rounded-lg hover:bg-blue-50 dark:hover:bg-blue-600/10 active:bg-blue-100 dark:active:bg-blue-600/20 transition-all shadow-sm"
+              className="px-4 py-2 text-base font-semibold text-primary border border-primary rounded-lg hover:bg-accent active:bg-accent/80 transition-all shadow-sm"
             >
               HR PITCH
             </Link>

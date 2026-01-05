@@ -213,7 +213,7 @@ export default function HREditPage({ params }: { params: Promise<{ id: string }>
               ? 'bg-teal-600 text-white' 
               : isToday 
               ? 'bg-teal-700 text-white'
-              : 'hover:bg-gray-700'
+              : 'hover:bg-accent'
           }`}
         >
           {day}
@@ -227,8 +227,8 @@ export default function HREditPage({ params }: { params: Promise<{ id: string }>
   return (
     <div className="p-6">
       <div className="max-w-5xl mx-auto">
-        <div className="bg-[#111111] rounded-xl border border-gray-800 p-8">
-          <h1 className="text-3xl font-bold text-white mb-8">Edit HR Record</h1>
+        <div className="bg-card rounded-xl border border-border p-8">
+          <h1 className="text-3xl font-bold text-heading mb-8">Edit HR Record</h1>
 
           {error && (
             <div className="mb-6 p-4 bg-red-900/30 border border-red-600 rounded text-red-400">
@@ -239,7 +239,7 @@ export default function HREditPage({ params }: { params: Promise<{ id: string }>
           <div>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
               <div>
-                <label className="block text-sm font-semibold text-gray-300 mb-2">
+                <label className="block text-sm font-semibold text-heading mb-2">
                   HR Name*
                 </label>
                 <input
@@ -247,12 +247,12 @@ export default function HREditPage({ params }: { params: Promise<{ id: string }>
                   name="hr_name"
                   value={formData.hr_name || ''}
                   onChange={handleChange}
-                  className="w-full px-3 py-2 bg-gray-900 border border-gray-700 rounded text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="w-full px-3 py-2 bg-background border border-input rounded text-foreground focus:outline-none focus:ring-2 focus:ring-ring"
                   required
                 />
               </div>
               <div>
-                <label className="block text-sm font-semibold text-gray-300 mb-2">
+                <label className="block text-sm font-semibold text-heading mb-2">
                   Phone Number*
                 </label>
                 <input
@@ -260,12 +260,12 @@ export default function HREditPage({ params }: { params: Promise<{ id: string }>
                   name="phone"
                   value={formData.phone || ''}
                   onChange={handleChange}
-                  className="w-full px-3 py-2 bg-gray-900 border border-gray-700 rounded text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="w-full px-3 py-2 bg-background border border-input rounded text-foreground focus:outline-none focus:ring-2 focus:ring-ring"
                   required
                 />
               </div>
               <div>
-                <label className="block text-sm font-semibold text-gray-300 mb-2">
+                <label className="block text-sm font-semibold text-heading mb-2">
                   Email
                 </label>
                 <input
@@ -273,21 +273,21 @@ export default function HREditPage({ params }: { params: Promise<{ id: string }>
                   name="email"
                   value={formData.email || ''}
                   onChange={handleChange}
-                  className="w-full px-3 py-2 bg-gray-900 border border-gray-700 rounded text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="w-full px-3 py-2 bg-background border border-input rounded text-foreground focus:outline-none focus:ring-2 focus:ring-ring"
                 />
               </div>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
               <div>
-                <label className="block text-sm font-semibold text-gray-300 mb-2">
+                <label className="block text-sm font-semibold text-heading mb-2">
                   Interview Mode
                 </label>
                 <select
                   name="interview_mode"
                   value={formData.interview_mode || ''}
                   onChange={handleChange}
-                  className="w-full px-3 py-2 bg-gray-900 border border-gray-700 rounded text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="w-full px-3 py-2 bg-background border border-input rounded text-foreground focus:outline-none focus:ring-2 focus:ring-ring"
                 >
                   {INTERVIEW_MODES.map((mode) => (
                     <option key={mode} value={mode}>
@@ -297,7 +297,7 @@ export default function HREditPage({ params }: { params: Promise<{ id: string }>
                 </select>
               </div>
               <div>
-                <label className="block text-sm font-semibold text-gray-300 mb-2">
+                <label className="block text-sm font-semibold text-heading mb-2">
                   Company*
                 </label>
                 <input
@@ -305,19 +305,19 @@ export default function HREditPage({ params }: { params: Promise<{ id: string }>
                   name="company"
                   value={formData.company || ''}
                   onChange={handleChange}
-                  className="w-full px-3 py-2 bg-gray-900 border border-gray-700 rounded text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="w-full px-3 py-2 bg-background border border-input rounded text-foreground focus:outline-none focus:ring-2 focus:ring-ring"
                   required
                 />
               </div>
               <div>
-                <label className="block text-sm font-semibold text-gray-300 mb-2">
+                <label className="block text-sm font-semibold text-heading mb-2">
                   Member*
                 </label>
                 <input
                   type="text"
                   name="member_name"
                   value={formData.member_name || ''}
-                  className="w-full px-3 py-2 bg-gray-800 border border-gray-700 rounded text-gray-300 cursor-not-allowed"
+                  className="w-full px-3 py-2 bg-muted border border-border rounded text-muted-foreground cursor-not-allowed"
                   readOnly
                 />
               </div>
@@ -325,26 +325,26 @@ export default function HREditPage({ params }: { params: Promise<{ id: string }>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
               <div>
-                <label className="block text-sm font-semibold text-gray-300 mb-2">
+                <label className="block text-sm font-semibold text-heading mb-2">
                   Incharge*
                 </label>
                 <input
                   type="text"
                   name="incharge"
                   value={formData.incharge || ''}
-                  className="w-full px-3 py-2 bg-gray-800 border border-gray-700 rounded text-gray-300 cursor-not-allowed"
+                  className="w-full px-3 py-2 bg-muted border border-border rounded text-muted-foreground cursor-not-allowed"
                   readOnly
                 />
               </div>
               <div>
-                <label className="block text-sm font-semibold text-gray-300 mb-2">
+                <label className="block text-sm font-semibold text-heading mb-2">
                   Status
                 </label>
                 <select
                   name="status"
                   value={formData.status || ''}
                   onChange={handleChange}
-                  className="w-full px-3 py-2 bg-gray-900 border border-gray-700 rounded text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="w-full px-3 py-2 bg-background border border-input rounded text-foreground focus:outline-none focus:ring-2 focus:ring-ring"
                 >
                   {STATUS_OPTIONS.map((status) => (
                     <option key={status} value={status}>
@@ -354,7 +354,7 @@ export default function HREditPage({ params }: { params: Promise<{ id: string }>
                 </select>
               </div>
               <div>
-                <label className="block text-sm font-semibold text-gray-300 mb-2">
+                <label className="block text-sm font-semibold text-heading mb-2">
                   HR Count
                 </label>
                 <input
@@ -362,7 +362,7 @@ export default function HREditPage({ params }: { params: Promise<{ id: string }>
                   name="hr_count"
                   value={formData.hr_count || ''}
                   onChange={handleChange}
-                  className="w-full px-3 py-2 bg-gray-900 border border-gray-700 rounded text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="w-full px-3 py-2 bg-background border border-input rounded text-foreground focus:outline-none focus:ring-2 focus:ring-ring"
                 />
               </div>
             </div>
@@ -375,7 +375,7 @@ export default function HREditPage({ params }: { params: Promise<{ id: string }>
                 <button
                   type="button"
                   onClick={() => setShowDatePicker(true)}
-                  className="mt-2 text-sm text-blue-400 hover:text-blue-300"
+                  className="mt-2 text-sm text-primary hover:text-primary/80"
                 >
                   Change Date/Time
                 </button>
@@ -384,14 +384,14 @@ export default function HREditPage({ params }: { params: Promise<{ id: string }>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
               <div>
-                <label className="block text-sm font-semibold text-gray-300 mb-2">
+                <label className="block text-sm font-semibold text-heading mb-2">
                   Transport
                 </label>
                 <select
                   name="transport"
                   value={formData.transport || ''}
                   onChange={handleChange}
-                  className="w-full px-3 py-2 bg-gray-900 border border-gray-700 rounded text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="w-full px-3 py-2 bg-background border border-input rounded text-foreground focus:outline-none focus:ring-2 focus:ring-ring"
                 >
                   <option value="">Select Transport</option>
                   {TRANSPORT_OPTIONS.map((option) => (
@@ -402,14 +402,14 @@ export default function HREditPage({ params }: { params: Promise<{ id: string }>
                 </select>
               </div>
               <div>
-                <label className="block text-sm font-semibold text-gray-300 mb-2">
+                <label className="block text-sm font-semibold text-heading mb-2">
                   Internship
                 </label>
                 <select
                   name="internship"
                   value={formData.internship || ''}
                   onChange={handleChange}
-                  className="w-full px-3 py-2 bg-gray-900 border border-gray-700 rounded text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="w-full px-3 py-2 bg-background border border-input rounded text-foreground focus:outline-none focus:ring-2 focus:ring-ring"
                 >
                   <option value="">Select</option>
                   {INTERNSHIP_OPTIONS.map((option) => (
@@ -423,7 +423,7 @@ export default function HREditPage({ params }: { params: Promise<{ id: string }>
             </div>
 
             <div className="mb-6">
-              <label className="block text-sm font-semibold text-gray-300 mb-2">
+              <label className="block text-sm font-semibold text-heading mb-2">
                 Address
               </label>
               <input
@@ -431,46 +431,46 @@ export default function HREditPage({ params }: { params: Promise<{ id: string }>
                 name="address"
                 value={formData.address || ''}
                 onChange={handleChange}
-                className="w-full px-3 py-2 bg-gray-900 border border-gray-700 rounded text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="w-full px-3 py-2 bg-background border border-input rounded text-foreground focus:outline-none focus:ring-2 focus:ring-ring"
               />
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
               <div>
-                <label className="block text-sm font-semibold text-gray-300 mb-2">
+                <label className="block text-sm font-semibold text-heading mb-2">
                   Member Email*
                 </label>
                 <input
                   type="email"
                   name="member_email"
                   value={formData.member_email || ''}
-                  className="w-full px-3 py-2 bg-gray-800 border border-gray-700 rounded text-gray-300 cursor-not-allowed"
+                  className="w-full px-3 py-2 bg-muted border border-border rounded text-muted-foreground cursor-not-allowed"
                   readOnly
                 />
               </div>
               <div>
-                <label className="block text-sm font-semibold text-gray-300 mb-2">
+                <label className="block text-sm font-semibold text-heading mb-2">
                   Incharge Email*
                 </label>
                 <input
                   type="email"
                   name="incharge_email"
                   value={formData.incharge_email || ''}
-                  className="w-full px-3 py-2 bg-gray-800 border border-gray-700 rounded text-gray-300 cursor-not-allowed"
+                  className="w-full px-3 py-2 bg-muted border border-border rounded text-muted-foreground cursor-not-allowed"
                   readOnly
                 />
               </div>
             </div>
 
             <div className="mb-6">
-              <label className="block text-sm font-semibold text-gray-300 mb-2">
+              <label className="block text-sm font-semibold text-heading mb-2">
                 Comments
               </label>
               <textarea
                 name="remark"
                 value={formData.remark || ''}
                 onChange={handleChange}
-                className="w-full px-3 py-2 bg-gray-900 border border-gray-700 rounded text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="w-full px-3 py-2 bg-background border border-input rounded text-foreground focus:outline-none focus:ring-2 focus:ring-ring"
                 rows={5}
               />
             </div>
@@ -479,23 +479,23 @@ export default function HREditPage({ params }: { params: Promise<{ id: string }>
               type="button"
               onClick={handleSubmit}
               disabled={loading}
-              className="w-full bg-blue-600 hover:bg-blue-700 disabled:bg-gray-700 text-white font-semibold py-3 rounded mb-6 transition"
+              className="w-full bg-primary hover:bg-primary/90 disabled:bg-muted disabled:cursor-not-allowed text-primary-foreground font-semibold py-3 rounded mb-6 transition"
             >
               {loading ? 'Updating...' : 'Update HR Record'}
             </button>
           </div>
 
-          <div className="flex gap-4 pt-6 border-t border-gray-800">
+          <div className="flex gap-4 pt-6 border-t border-border">
             <Link
               href="/dashboard"
-              className="text-blue-400 hover:text-blue-300 font-semibold"
+              className="text-primary hover:text-primary/80 font-semibold"
             >
               Back to HR Database
             </Link>
             <button
               onClick={handleDelete}
               disabled={loading}
-              className="bg-red-600 hover:bg-red-700 disabled:bg-gray-700 text-white px-4 py-2 rounded font-semibold transition"
+              className="bg-red-600 hover:bg-red-700 disabled:bg-muted disabled:cursor-not-allowed text-white px-4 py-2 rounded font-semibold transition"
             >
               Delete HR Record
             </button>
@@ -505,22 +505,22 @@ export default function HREditPage({ params }: { params: Promise<{ id: string }>
 
       {showDatePicker && (
         <div className="fixed inset-0 bg-black/70 flex items-center justify-center z-50 p-4">
-          <div className="bg-white rounded-2xl shadow-2xl max-w-4xl w-full flex overflow-hidden">
-            <div className="flex-1 p-8 bg-gray-50">
+          <div className="bg-card rounded-2xl shadow-2xl max-w-4xl w-full flex overflow-hidden">
+            <div className="flex-1 p-8 bg-muted">
               <div className="flex items-center justify-between mb-6">
                 <button
                   type="button"
-                  className="p-2 hover:bg-gray-200 rounded"
+                  className="p-2 hover:bg-accent rounded"
                   onClick={() => setCurrentMonth(new Date(currentMonth.getFullYear(), currentMonth.getMonth() - 1))}
                 >
                   ‹
                 </button>
-                <h2 className="text-xl font-bold text-gray-800">
+                <h2 className="text-xl font-bold text-heading">
                   {currentMonth.toLocaleDateString('en-US', { month: 'long', year: 'numeric' })}
                 </h2>
                 <button
                   type="button"
-                  className="p-2 hover:bg-gray-200 rounded"
+                  className="p-2 hover:bg-accent rounded"
                   onClick={() => setCurrentMonth(new Date(currentMonth.getFullYear(), currentMonth.getMonth() + 1))}
                 >
                   ›
@@ -529,33 +529,33 @@ export default function HREditPage({ params }: { params: Promise<{ id: string }>
 
               <div className="grid grid-cols-7 gap-2 mb-2">
                 {['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'].map(day => (
-                  <div key={day} className="text-center text-sm font-semibold text-gray-600">
+                  <div key={day} className="text-center text-sm font-semibold text-heading">
                     {day}
                   </div>
                 ))}
               </div>
 
-              <div className="grid grid-cols-7 gap-2 text-gray-800">
+              <div className="grid grid-cols-7 gap-2 text-card-foreground">
                 {renderCalendar()}
               </div>
 
               <button
                 type="button"
                 onClick={() => setShowDatePicker(false)}
-                className="mt-6 w-full py-2 text-gray-600 hover:bg-gray-200 rounded font-semibold"
+                className="mt-6 w-full py-2 text-muted-foreground hover:bg-accent rounded font-semibold"
               >
                 Cancel
               </button>
             </div>
 
-            <div className="flex-1 p-8 bg-white border-l">
-              <h2 className="text-xl font-bold text-gray-800 mb-6">Set Time</h2>
+            <div className="flex-1 p-8 bg-card border-l border-border">
+              <h2 className="text-xl font-bold text-heading mb-6">Set Time</h2>
 
               <div className="flex justify-center items-center mb-8">
-                <div className="relative w-48 h-48 rounded-full border-8 border-gray-800">
-                  <div className="absolute top-1/2 left-1/2 w-1 h-20 bg-gray-800 origin-bottom -translate-x-1/2 -translate-y-full rotate-30"></div>
+                <div className="relative w-48 h-48 rounded-full border-8 border-border">
+                  <div className="absolute top-1/2 left-1/2 w-1 h-20 bg-border origin-bottom -translate-x-1/2 -translate-y-full rotate-30"></div>
                   <div className="absolute top-1/2 left-1/2 w-1 h-16 bg-red-500 origin-bottom -translate-x-1/2 -translate-y-full rotate-180"></div>
-                  <div className="absolute top-1/2 left-1/2 w-3 h-3 bg-gray-800 rounded-full -translate-x-1/2 -translate-y-1/2"></div>
+                  <div className="absolute top-1/2 left-1/2 w-3 h-3 bg-border rounded-full -translate-x-1/2 -translate-y-1/2"></div>
                 </div>
               </div>
 
@@ -563,7 +563,7 @@ export default function HREditPage({ params }: { params: Promise<{ id: string }>
                 <select
                   value={selectedTime.hour}
                   onChange={(e) => setSelectedTime({ ...selectedTime, hour: e.target.value })}
-                  className="px-4 py-2 border border-gray-300 rounded text-gray-800 font-semibold"
+                  className="px-4 py-2 border border-input rounded text-card-foreground font-semibold bg-background"
                 >
                   {Array.from({ length: 12 }, (_, i) => String(i + 1).padStart(2, '0')).map(h => (
                     <option key={h} value={h}>{h}</option>
@@ -573,7 +573,7 @@ export default function HREditPage({ params }: { params: Promise<{ id: string }>
                 <select
                   value={selectedTime.minute}
                   onChange={(e) => setSelectedTime({ ...selectedTime, minute: e.target.value })}
-                  className="px-4 py-2 border border-gray-300 rounded text-gray-800 font-semibold"
+                  className="px-4 py-2 border border-input rounded text-card-foreground font-semibold bg-background"
                 >
                   {Array.from({ length: 60 }, (_, i) => String(i).padStart(2, '0')).map(m => (
                     <option key={m} value={m}>{m}</option>
@@ -583,7 +583,7 @@ export default function HREditPage({ params }: { params: Promise<{ id: string }>
                 <select
                   value={selectedTime.period}
                   onChange={(e) => setSelectedTime({ ...selectedTime, period: e.target.value })}
-                  className="px-4 py-2 border border-gray-300 rounded text-gray-800 font-semibold"
+                  className="px-4 py-2 border border-input rounded text-card-foreground font-semibold bg-background"
                 >
                   <option value="AM">AM</option>
                   <option value="PM">PM</option>

@@ -38,7 +38,7 @@ export default function SearchClient({ contacts }: { contacts: any[] }) {
 
   return (
     <>
-      <div className="rounded-xl border border-gray-800 bg-[#111111] p-6 space-y-5">
+      <div className="rounded-xl border border-border bg-card p-6 space-y-5">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
           <Input
             label="Search All Fields"
@@ -98,7 +98,7 @@ export default function SearchClient({ contacts }: { contacts: any[] }) {
               setSearchStatus('');
               setSearchMode('');
             }}
-            className="h-[42px] rounded-lg bg-gray-700 font-semibold hover:bg-gray-600 transition flex items-center justify-center gap-2"
+            className="h-[42px] rounded-lg bg-muted hover:bg-accent text-muted-foreground hover:text-accent-foreground font-semibold transition flex items-center justify-center gap-2"
           >
             <svg
               className="w-5 h-5"
@@ -117,7 +117,7 @@ export default function SearchClient({ contacts }: { contacts: any[] }) {
           </button>
         </div>
 
-        <div className="text-sm text-gray-400 flex items-center gap-2">
+        <div className="text-sm text-muted-foreground flex items-center gap-2">
           <svg
             className="w-4 h-4"
             fill="none"
@@ -149,7 +149,7 @@ export default function SearchClient({ contacts }: { contacts: any[] }) {
       )}
 
       {!hasFilters && (
-        <div className="text-center py-12 text-gray-400">
+        <div className="text-center py-12 text-muted-foreground">
           Enter search criteria to find HR contacts
         </div>
       )}
@@ -170,14 +170,14 @@ function Input({
 }) {
   return (
     <div>
-      <label className="block text-sm font-medium text-gray-300 mb-2">
+      <label className="block text-sm font-medium text-card-foreground mb-2">
         {label}
       </label>
       <input
         value={value}
         onChange={onChange}
         placeholder={placeholder}
-        className="w-full rounded-lg bg-gray-900 border border-gray-700 px-4 py-2.5 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500"
+        className="w-full rounded-lg bg-background border border-input px-4 py-2.5 text-foreground placeholder-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring"
       />
     </div>
   );
@@ -196,13 +196,13 @@ function Select({
 }) {
   return (
     <div>
-      <label className="block text-sm font-medium text-gray-300 mb-2">
+      <label className="block text-sm font-medium text-card-foreground mb-2">
         {label}
       </label>
       <select
         value={value}
         onChange={onChange}
-        className="w-full rounded-lg bg-gray-900 border border-gray-700 px-4 py-2.5 text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+        className="w-full rounded-lg bg-background border border-input px-4 py-2.5 text-foreground focus:outline-none focus:ring-2 focus:ring-ring"
       >
         <option value="">Select</option>
         {options.map((opt) => (

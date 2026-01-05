@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useRef } from 'react';
+import { STATUS_COLORS } from '@/lib/statusColors';
 
 interface StatsModalProps {
   isOpen: boolean;
@@ -21,17 +22,7 @@ interface StatsModalProps {
 export default function StatsModal({ isOpen, onClose, stats }: StatsModalProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
-  const colors = {
-    'Awaiting Response': '#4f46e5',
-    'Accepted Invite': '#10b981',
-    'Email Sent': '#a855f7',
-    'Called Declined': '#ef4444',
-    'Emailed Declined': '#f59e0b',
-    'Blacklisted': '#6b7280',
-    'Wrong Number': '#f97316',
-    'Call Postponed': '#06b6d4',
-    'Not Reachable': '#dc2626',
-  };
+  const colors = STATUS_COLORS;
 
   const totalContacts = Object.values(stats).reduce((a, b) => a + b, 0);
 

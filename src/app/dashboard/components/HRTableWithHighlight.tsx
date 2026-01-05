@@ -1,6 +1,7 @@
 'use client';
 
 import React from 'react';
+import { STATUS_STYLES } from '@/lib/statusColors';
 
 interface Contact {
   id: number;
@@ -60,7 +61,7 @@ function highlightText(text: string, searchTerms: SearchTerms): React.ReactNode 
 export default function HRTableWithHighlight({ contacts, searchTerms = {} }: HRTableProps) {
   if (contacts.length === 0) {
     return (
-      <div className="rounded-xl border border-gray-800 bg-[#111111] p-8 text-center">
+      <div className="rounded-xl border border-border bg-card p-8 text-center shadow-sm">
         <svg
           className="mx-auto h-12 w-12 text-gray-500"
           fill="none"
@@ -74,8 +75,8 @@ export default function HRTableWithHighlight({ contacts, searchTerms = {} }: HRT
             d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
           />
         </svg>
-        <h3 className="mt-4 text-lg font-medium text-gray-300">No contacts found</h3>
-        <p className="mt-2 text-sm text-gray-500">
+        <h3 className="mt-4 text-lg font-medium text-heading">No contacts found</h3>
+        <p className="mt-2 text-sm text-muted-foreground">
           Try adjusting your search filters to find what you're looking for.
         </p>
       </div>
@@ -83,55 +84,59 @@ export default function HRTableWithHighlight({ contacts, searchTerms = {} }: HRT
   }
 
   return (
-    <div className="rounded-xl border border-gray-800 bg-[#111111] overflow-hidden">
+    <div className="rounded-xl border border-border bg-card overflow-hidden shadow-sm">
       <div className="overflow-x-auto">
         <table className="w-full">
-          <thead className="bg-gray-900 border-b border-gray-800">
+          <thead className="bg-secondary border-b border-border">
             <tr>
-              <th className="px-6 py-4 text-left text-xs font-semibold text-gray-400 uppercase tracking-wider">
+              <th className="px-6 py-4 text-left text-xs font-semibold text-heading uppercase tracking-wider">
                 HR Name
               </th>
-              <th className="px-6 py-4 text-left text-xs font-semibold text-gray-400 uppercase tracking-wider">
+              <th className="px-6 py-4 text-left text-xs font-semibold text-heading uppercase tracking-wider">
                 Company
               </th>
-              <th className="px-6 py-4 text-left text-xs font-semibold text-gray-400 uppercase tracking-wider">
+              <th className="px-6 py-4 text-left text-xs font-semibold text-heading uppercase tracking-wider">
                 Email
               </th>
-              <th className="px-6 py-4 text-left text-xs font-semibold text-gray-400 uppercase tracking-wider">
+              <th className="px-6 py-4 text-left text-xs font-semibold text-heading uppercase tracking-wider">
                 Phone
               </th>
-              <th className="px-6 py-4 text-left text-xs font-semibold text-gray-400 uppercase tracking-wider">
+              <th className="px-6 py-4 text-left text-xs font-semibold text-heading uppercase tracking-wider">
                 Status
               </th>
-              <th className="px-6 py-4 text-left text-xs font-semibold text-gray-400 uppercase tracking-wider">
+              <th className="px-6 py-4 text-left text-xs font-semibold text-heading uppercase tracking-wider">
                 Mode
               </th>
             </tr>
           </thead>
-          <tbody className="divide-y divide-gray-800">
+          <tbody className="divide-y divide-border">
             {contacts.map((contact, idx) => (
               <tr 
                 key={contact.id || idx}
-                className="hover:bg-gray-900/50 transition-colors"
+                className="hover:bg-accent transition-colors"
               >
-                <td className="px-6 py-4 text-sm text-gray-200">
+                <td className="px-6 py-4 text-sm text-card-foreground">
                   {highlightText(contact.hr_name, searchTerms)}
                 </td>
-                <td className="px-6 py-4 text-sm text-gray-200">
+                <td className="px-6 py-4 text-sm text-card-foreground">
                   {highlightText(contact.company, searchTerms)}
                 </td>
-                <td className="px-6 py-4 text-sm text-gray-200">
+                <td className="px-6 py-4 text-sm text-card-foreground">
                   {highlightText(contact.email, searchTerms)}
                 </td>
-                <td className="px-6 py-4 text-sm text-gray-200">
+                <td className="px-6 py-4 text-sm text-card-foreground">
                   {highlightText(contact.phone, searchTerms)}
                 </td>
                 <td className="px-6 py-4">
-                  <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-900/50 text-blue-300 border border-blue-800">
+                  <span
+                    className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${
+                      STATUS_STYLES[contact.status] || 'bg-gray-500 text-white'
+                    }`}
+                  >
                     {contact.status}
                   </span>
                 </td>
-                <td className="px-6 py-4 text-sm text-gray-200">
+                <td className="px-6 py-4 text-sm text-card-foreground">
                   {contact.interview_mode}
                 </td>
               </tr>
@@ -140,9 +145,9 @@ export default function HRTableWithHighlight({ contacts, searchTerms = {} }: HRT
         </table>
       </div>
       
-      <div className="px-6 py-4 bg-gray-900 border-t border-gray-800">
-        <p className="text-sm text-gray-400">
-          Showing <span className="font-medium text-white">{contacts.length}</span> result{contacts.length !== 1 ? 's' : ''}
+      <div className="px-6 py-4 bg-secondary border-t border-border">
+        <p className="text-sm text-muted-foreground">
+          Showing <span className="font-medium text-heading">{contacts.length}</span> result{contacts.length !== 1 ? 's' : ''}
         </p>
       </div>
     </div>

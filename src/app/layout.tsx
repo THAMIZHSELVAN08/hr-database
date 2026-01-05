@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Geist_Mono } from "next/font/google";
 import "./globals.css";
+import ThemeInitializer from "@/components/ThemeInitializer";
 
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
@@ -18,11 +19,40 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
+      <head>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              (function() {
+                try {
+                  const theme = localStorage.getItem('theme-storage');
+                  if (theme) {
+                    const parsed = JSON.parse(theme);
+                    if (parsed && parsed.state && parsed.state.isDarkMode === true) {
+                      document.documentElement.classList.add('dark');
+                    } else {
+                      document.documentElement.classList.remove('dark');
+                    }
+                  } else {
+                    // Default to light mode if no preference stored
+                    document.documentElement.classList.remove('dark');
+                  }
+                } catch (e) {
+                  console.error('Theme initialization error:', e);
+                  document.documentElement.classList.remove('dark');
+                }
+              })();
+            `,
+          }}
+        />
+      </head>
       <body
+        suppressHydrationWarning
         className={`${geistMono.variable} antialiased`}
         style={{ fontFamily: "'Segoe UI', -apple-system, BlinkMacSystemFont, system-ui, sans-serif" }}
       >
+        <ThemeInitializer />
         {children}
       </body>
     </html>

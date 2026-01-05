@@ -147,11 +147,11 @@ export default function ManualAddForm() {
 
   if (isLoading) {
     return (
-      <div className="bg-[#0A0A0A] rounded-2xl border border-gray-800/50 p-10 shadow-2xl" style={{ fontFamily: '"Segoe UI", system-ui, sans-serif' }}>
+      <div className="bg-card rounded-2xl border border-border p-10 shadow-2xl" style={{ fontFamily: '"Segoe UI", system-ui, sans-serif' }}>
         <div className="flex items-center justify-center py-12">
           <div className="relative w-16 h-16">
-            <div className="absolute inset-0 border-4 border-gray-800 rounded-full"></div>
-            <div className="absolute inset-0 border-4 border-transparent border-t-blue-500 rounded-full animate-spin"></div>
+            <div className="absolute inset-0 border-4 border-muted rounded-full"></div>
+            <div className="absolute inset-0 border-4 border-transparent border-t-primary rounded-full animate-spin"></div>
           </div>
         </div>
       </div>
@@ -159,8 +159,8 @@ export default function ManualAddForm() {
   }
 
   return (
-    <div className="bg-[#0A0A0A] rounded-2xl border border-gray-800/50 p-10 shadow-2xl" style={{ fontFamily: '"Segoe UI", system-ui, sans-serif' }}>
-      <h2 className="text-3xl font-semibold text-white mb-8 tracking-tight">Add New HR Record</h2>
+    <div className="bg-card rounded-2xl border border-border p-10 shadow-2xl" style={{ fontFamily: '"Segoe UI", system-ui, sans-serif' }}>
+      <h2 className="text-3xl font-semibold text-card-foreground mb-8 tracking-tight">Add New HR Record</h2>
 
       {error && (
         <div className="mb-6 p-5 bg-red-900/20 border border-red-600/50 rounded-xl text-red-300 shadow-lg shadow-red-900/10">
@@ -176,10 +176,10 @@ export default function ManualAddForm() {
 
       <form onSubmit={handleSubmit} className="space-y-7">
         <div>
-          <h3 className="text-base font-semibold text-gray-300 mb-4 tracking-tight">HR Contact Details</h3>
+          <h3 className="text-base font-semibold text-card-foreground mb-4 tracking-tight">HR Contact Details</h3>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
             <div>
-              <label className="block text-sm font-medium text-gray-400 mb-2.5 tracking-wide">
+              <label className="block text-sm font-medium text-muted-foreground mb-2.5 tracking-wide">
                 HR Name <span className="text-red-400">*</span>
               </label>
               <input
@@ -187,13 +187,13 @@ export default function ManualAddForm() {
                 name="hr_name"
                 value={formData.hr_name}
                 onChange={handleChange}
-                className="w-full px-4 py-3 bg-gray-900/50 border border-gray-700/50 rounded-xl text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:border-blue-500/50 transition-all duration-200"
+                className="w-full px-4 py-3 bg-background border border-input rounded-xl text-foreground placeholder-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:border-ring transition-all duration-200"
                 placeholder="Enter HR name"
                 required
               />
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-400 mb-2.5 tracking-wide">
+              <label className="block text-sm font-medium text-muted-foreground mb-2.5 tracking-wide">
                 Phone Number <span className="text-red-400">*</span>
               </label>
               <input
@@ -201,13 +201,13 @@ export default function ManualAddForm() {
                 name="phone"
                 value={formData.phone}
                 onChange={handleChange}
-                className="w-full px-4 py-3 bg-gray-900/50 border border-gray-700/50 rounded-xl text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:border-blue-500/50 transition-all duration-200"
+                className="w-full px-4 py-3 bg-background border border-input rounded-xl text-foreground placeholder-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:border-ring transition-all duration-200"
                 placeholder="Enter phone number"
                 required
               />
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-400 mb-2.5 tracking-wide">
+              <label className="block text-sm font-medium text-muted-foreground mb-2.5 tracking-wide">
                 Email
               </label>
               <input
@@ -215,7 +215,7 @@ export default function ManualAddForm() {
                 name="email"
                 value={formData.email}
                 onChange={handleChange}
-                className="w-full px-4 py-3 bg-gray-900/50 border border-gray-700/50 rounded-xl text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:border-blue-500/50 transition-all duration-200"
+                className="w-full px-4 py-3 bg-background border border-input rounded-xl text-foreground placeholder-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:border-ring transition-all duration-200"
                 placeholder="Enter email address"
               />
             </div>
@@ -223,10 +223,10 @@ export default function ManualAddForm() {
         </div>
 
         <div>
-          <h3 className="text-base font-semibold text-gray-300 mb-4 tracking-tight">Company & Interview Information</h3>
+          <h3 className="text-base font-semibold text-card-foreground mb-4 tracking-tight">Company & Interview Information</h3>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
             <div>
-              <label className="block text-sm font-medium text-gray-400 mb-2.5 tracking-wide">
+              <label className="block text-sm font-medium text-muted-foreground mb-2.5 tracking-wide">
                 Company <span className="text-red-400">*</span>
               </label>
               <input
@@ -234,20 +234,20 @@ export default function ManualAddForm() {
                 name="company"
                 value={formData.company}
                 onChange={handleChange}
-                className="w-full px-4 py-3 bg-gray-900/50 border border-gray-700/50 rounded-xl text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:border-blue-500/50 transition-all duration-200"
+                className="w-full px-4 py-3 bg-background border border-input rounded-xl text-foreground placeholder-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:border-ring transition-all duration-200"
                 placeholder="Enter company name"
                 required
               />
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-400 mb-2.5 tracking-wide">
+              <label className="block text-sm font-medium text-muted-foreground mb-2.5 tracking-wide">
                 Interview Mode
               </label>
               <select
                 name="interview_mode"
                 value={formData.interview_mode}
                 onChange={handleChange}
-                className="w-full px-4 py-3 bg-gray-900/50 border border-gray-700/50 rounded-xl text-white focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:border-blue-500/50 transition-all duration-200"
+                className="w-full px-4 py-3 bg-background border border-input rounded-xl text-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:border-ring transition-all duration-200"
               >
                 {INTERVIEW_MODES.map((mode) => (
                   <option key={mode} value={mode}>
@@ -257,14 +257,14 @@ export default function ManualAddForm() {
               </select>
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-400 mb-2.5 tracking-wide">
+              <label className="block text-sm font-medium text-muted-foreground mb-2.5 tracking-wide">
                 Status <span className="text-red-400">*</span>
               </label>
               <select
                 name="status"
                 value={formData.status}
                 onChange={handleChange}
-                className="w-full px-4 py-3 bg-gray-900/50 border border-gray-700/50 rounded-xl text-white focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:border-blue-500/50 transition-all duration-200"
+                className="w-full px-4 py-3 bg-background border border-input rounded-xl text-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:border-ring transition-all duration-200"
                 required
               >
                 {STATUS_OPTIONS.map((status) => (
@@ -278,53 +278,53 @@ export default function ManualAddForm() {
         </div>
 
         <div>
-          <h3 className="text-base font-semibold text-gray-300 mb-4 tracking-tight">Member & Team Assignment</h3>
+          <h3 className="text-base font-semibold text-card-foreground mb-4 tracking-tight">Member & Team Assignment</h3>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
             <div>
-              <label className="block text-sm font-medium text-gray-400 mb-2.5 tracking-wide">
+              <label className="block text-sm font-medium text-muted-foreground mb-2.5 tracking-wide">
                 Member <span className="text-red-400">*</span>
               </label>
               <input
                 type="text"
                 name="member_name"
                 value={formData.member_name}
-                className="w-full px-4 py-3 bg-gray-800/70 border border-gray-700/70 rounded-xl text-gray-300 cursor-not-allowed"
+                className="w-full px-4 py-3 bg-muted border border-border rounded-xl text-muted-foreground cursor-not-allowed"
                 readOnly
               />
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-400 mb-2.5 tracking-wide">
+              <label className="block text-sm font-medium text-muted-foreground mb-2.5 tracking-wide">
                 Member Email <span className="text-red-400">*</span>
               </label>
               <input
                 type="email"
                 name="member_email"
                 value={formData.member_email}
-                className="w-full px-4 py-3 bg-gray-800/70 border border-gray-700/70 rounded-xl text-gray-300 cursor-not-allowed"
+                className="w-full px-4 py-3 bg-muted border border-border rounded-xl text-muted-foreground cursor-not-allowed"
                 readOnly
               />
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-400 mb-2.5 tracking-wide">
+              <label className="block text-sm font-medium text-muted-foreground mb-2.5 tracking-wide">
                 Incharge <span className="text-red-400">*</span>
               </label>
               <input
                 type="text"
                 name="incharge"
                 value={formData.incharge}
-                className="w-full px-4 py-3 bg-gray-800/70 border border-gray-700/70 rounded-xl text-gray-300 cursor-not-allowed"
+                className="w-full px-4 py-3 bg-muted border border-border rounded-xl text-muted-foreground cursor-not-allowed"
                 readOnly
               />
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-400 mb-2.5 tracking-wide">
+              <label className="block text-sm font-medium text-muted-foreground mb-2.5 tracking-wide">
                 Incharge Email <span className="text-red-400">*</span>
               </label>
               <input
                 type="email"
                 name="incharge_email"
                 value={formData.incharge_email}
-                className="w-full px-4 py-3 bg-gray-800/70 border border-gray-700/70 rounded-xl text-gray-300 cursor-not-allowed"
+                className="w-full px-4 py-3 bg-muted border border-border rounded-xl text-muted-foreground cursor-not-allowed"
                 readOnly
               />
             </div>
@@ -332,10 +332,10 @@ export default function ManualAddForm() {
         </div>
 
         <div>
-          <h3 className="text-base font-semibold text-gray-300 mb-4 tracking-tight">Additional Information</h3>
+          <h3 className="text-base font-semibold text-card-foreground mb-4 tracking-tight">Additional Information</h3>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-5 mb-5">
             <div>
-              <label className="block text-sm font-medium text-gray-400 mb-2.5 tracking-wide">
+              <label className="block text-sm font-medium text-muted-foreground mb-2.5 tracking-wide">
                 HR Count <span className="text-red-400">*</span>
               </label>
               <input
@@ -343,19 +343,19 @@ export default function ManualAddForm() {
                 name="hr_count"
                 value={formData.hr_count}
                 onChange={handleChange}
-                className="w-full px-4 py-3 bg-gray-900/50 border border-gray-700/50 rounded-xl text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:border-blue-500/50 transition-all duration-200"
+                className="w-full px-4 py-3 bg-background border border-input rounded-xl text-foreground placeholder-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:border-ring transition-all duration-200"
                 required
               />
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-400 mb-2.5 tracking-wide">
+              <label className="block text-sm font-medium text-muted-foreground mb-2.5 tracking-wide">
                 Transport
               </label>
               <select
                 name="transport"
                 value={formData.transport}
                 onChange={handleChange}
-                className="w-full px-4 py-3 bg-gray-900/50 border border-gray-700/50 rounded-xl text-white focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:border-blue-500/50 transition-all duration-200"
+                className="w-full px-4 py-3 bg-background border border-input rounded-xl text-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:border-ring transition-all duration-200"
               >
                 {TRANSPORT_OPTIONS.map((option) => (
                   <option key={option} value={option}>
@@ -365,14 +365,14 @@ export default function ManualAddForm() {
               </select>
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-400 mb-2.5 tracking-wide">
+              <label className="block text-sm font-medium text-muted-foreground mb-2.5 tracking-wide">
                 Internship
               </label>
               <select
                 name="internship"
                 value={formData.internship}
                 onChange={handleChange}
-                className="w-full px-4 py-3 bg-gray-900/50 border border-gray-700/50 rounded-xl text-white focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:border-blue-500/50 transition-all duration-200"
+                className="w-full px-4 py-3 bg-background border border-input rounded-xl text-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:border-ring transition-all duration-200"
               >
                 {INTERNSHIP_OPTIONS.map((option) => (
                   <option key={option} value={option}>
@@ -384,7 +384,7 @@ export default function ManualAddForm() {
           </div>
           
           <div className="mb-5">
-            <label className="block text-sm font-medium text-gray-400 mb-2.5 tracking-wide">
+            <label className="block text-sm font-medium text-muted-foreground mb-2.5 tracking-wide">
               Address
             </label>
             <input
@@ -392,20 +392,20 @@ export default function ManualAddForm() {
               name="address"
               value={formData.address}
               onChange={handleChange}
-              className="w-full px-4 py-3 bg-gray-900/50 border border-gray-700/50 rounded-xl text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:border-blue-500/50 transition-all duration-200"
+              className="w-full px-4 py-3 bg-background border border-input rounded-xl text-foreground placeholder-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:border-ring transition-all duration-200"
               placeholder="Enter address"
             />
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-400 mb-2.5 tracking-wide">
+            <label className="block text-sm font-medium text-muted-foreground mb-2.5 tracking-wide">
               Comments
             </label>
             <textarea
               name="remark"
               value={formData.remark}
               onChange={handleChange}
-              className="w-full px-4 py-3 bg-gray-900/50 border border-gray-700/50 rounded-xl text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:border-blue-500/50 transition-all duration-200 resize-none"
+              className="w-full px-4 py-3 bg-background border border-input rounded-xl text-foreground placeholder-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:border-ring transition-all duration-200 resize-none"
               rows={4}
               placeholder="Add any additional notes or comments..."
             />
@@ -415,7 +415,7 @@ export default function ManualAddForm() {
         <button
           type="submit"
           disabled={loading}
-          className="w-full bg-blue-600 hover:bg-blue-700 disabled:bg-gray-700 disabled:cursor-not-allowed text-white font-medium py-4 rounded-xl transition-all duration-200 shadow-lg shadow-blue-600/20 hover:shadow-blue-600/30 hover:scale-[1.01] disabled:hover:scale-100"
+          className="w-full bg-primary hover:bg-primary/90 disabled:bg-muted disabled:cursor-not-allowed text-primary-foreground font-medium py-4 rounded-xl transition-all duration-200 shadow-lg hover:scale-[1.01] disabled:hover:scale-100"
         >
           {loading ? 'Adding HR Record...' : 'Add HR Record'}
         </button>

@@ -78,10 +78,10 @@ export default function NotificationsPage() {
   if (loading) {
     return (
       <div 
-        className="min-h-screen bg-[#0a0e0f] flex items-center justify-center"
+        className="min-h-screen bg-background flex items-center justify-center"
         style={{ fontFamily: 'Segoe UI, -apple-system, BlinkMacSystemFont, sans-serif' }}
       >
-        <div className="text-white text-xl font-medium">Loading notifications...</div>
+        <div className="text-foreground text-xl font-medium">Loading notifications...</div>
       </div>
     );
   }
@@ -90,13 +90,13 @@ export default function NotificationsPage() {
 
   return (
     <div 
-      className="min-h-screen bg-[#0a0e0f] py-12 px-6"
+      className="min-h-screen bg-background py-12 px-6"
       style={{ fontFamily: 'Segoe UI, -apple-system, BlinkMacSystemFont, sans-serif' }}
     >
       <div className="max-w-4xl mx-auto">
         <div className="flex items-center justify-between mb-10">
           <div className="flex items-center gap-4">
-            <h1 className="text-4xl font-semibold text-white tracking-tight">Notifications</h1>
+            <h1 className="text-4xl font-semibold text-foreground tracking-tight">Notifications</h1>
             {unreadCount > 0 && (
               <div className="bg-red-600 text-white px-4 py-1.5 rounded-full text-sm font-semibold shadow-lg">
                 {unreadCount} new
@@ -106,8 +106,8 @@ export default function NotificationsPage() {
         </div>
 
         {notifications.length === 0 ? (
-          <div className="bg-[#151a1e] border border-[#1f2937] rounded-xl p-12 text-center">
-            <p className="text-gray-400 text-lg font-medium">No notifications yet</p>
+          <div className="bg-card border border-border rounded-xl p-12 text-center">
+            <p className="text-muted-foreground text-lg font-medium">No notifications yet</p>
           </div>
         ) : (
           <div className="space-y-4">
@@ -122,8 +122,8 @@ export default function NotificationsPage() {
                 }}
                 className={`block p-6 rounded-xl border transition-all duration-200 cursor-pointer ${
                   n.read
-                    ? 'bg-[#151a1e] border-[#1f2937] hover:border-[#2d3748] hover:bg-[#1a1f24]'
-                    : 'bg-[#1a2332] border-blue-500/50 hover:border-blue-500 hover:bg-[#1e2840] shadow-lg'
+                    ? 'bg-card border-border hover:border-border/80 hover:bg-accent'
+                    : 'bg-muted border-primary/50 hover:border-primary hover:bg-accent shadow-lg'
                 }`}
               >
                 <div className="flex items-start justify-between gap-4">
@@ -132,18 +132,18 @@ export default function NotificationsPage() {
                       {!n.read && (
                         <span className="w-2.5 h-2.5 bg-red-500 rounded-full shrink-0 animate-pulse" />
                       )}
-                      <h3 className={`font-semibold text-lg leading-tight ${n.read ? 'text-gray-400' : 'text-white'}`}>
+                      <h3 className={`font-semibold text-lg leading-tight ${n.read ? 'text-muted-foreground' : 'text-card-foreground'}`}>
                         Follow-up: {n.hr_name} – {n.company}
                       </h3>
                     </div>
                     
                     {n.notify_at && (
-                      <p className="text-sm text-gray-400 ml-5 mb-2 font-medium">
+                      <p className="text-sm text-muted-foreground ml-5 mb-2 font-medium">
                         📅 Scheduled for: {formatNotificationDate(n.notify_at)}
                       </p>
                     )}
                     
-                    <p className="text-xs text-gray-500 ml-5 font-medium">
+                    <p className="text-xs text-muted-foreground ml-5 font-medium">
                       Created {new Date(n.created_at).toLocaleDateString('en-US', {
                         month: 'short',
                         day: 'numeric',
@@ -155,7 +155,7 @@ export default function NotificationsPage() {
 
                   <svg 
                     className={`w-6 h-6 shrink-0 mt-1 transition-colors ${
-                      n.read ? 'text-gray-600' : 'text-blue-400'
+                      n.read ? 'text-muted-foreground' : 'text-primary'
                     }`}
                     fill="none" 
                     stroke="currentColor" 

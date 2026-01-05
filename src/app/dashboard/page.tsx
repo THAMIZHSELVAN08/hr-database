@@ -4,13 +4,7 @@ import { db } from '@/lib/db';
 import { verifyJWT } from '@/lib/jwt';
 import StatusDonutCard from '@/app/dashboard/components/StatusDonutCard';
 import HRTable from '@/app/dashboard/components/HRTable';
-
-const STATUS_COLORS: Record<string, string> = {
-  'Awaiting Response': '#4f46e5',
-  'Email Sent': '#a855f7',
-  'Call Postponed': '#06b6d4',
-  'Wrong Number': '#f97316',
-};
+import { STATUS_COLORS } from '@/lib/statusColors';
 
 export default async function DashboardPage() {
   const token = (await cookies()).get('token')?.value;
@@ -58,29 +52,29 @@ export default async function DashboardPage() {
       className="p-8"
       style={{ fontFamily: 'Segoe UI, -apple-system, BlinkMacSystemFont, sans-serif' }}
     >
-      <div className="mb-8">
-        <h2 className="text-2xl font-semibold text-gray-900 dark:text-white mb-2">
+      <div className="mb-8 text-center">
+        <h2 className="text-3xl md:text-4xl font-bold text-heading mb-3">
           Dashboard Overview
         </h2>
-        <p className="text-sm text-gray-600 dark:text-gray-400">
+        <p className="text-base text-muted-foreground">
           Track and manage your HR contacts
         </p>
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-        {Object.entries(STATUS_COLORS).map(([status, color]) => (
+        {['Accepted Invite', 'Awaiting Response', 'Email Sent', 'Call Postponed'].map((status) => (
           <StatusDonutCard
             key={status}
             label={status}
             value={statusCounts[status] || 0}
             total={total}
-            color={color}
+            color={STATUS_COLORS[status]}
           />
         ))}
       </div>
 
       <div className="mb-6">
-        <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">
+        <h3 className="text-lg font-semibold text-foreground mb-4">
           All Contacts
         </h3>
       </div>

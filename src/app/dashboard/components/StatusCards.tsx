@@ -7,12 +7,12 @@ type CardProps = {
 function Card({ title, count, color }: CardProps) {
   return (
     <div 
-      className="bg-white dark:bg-[#111111] rounded-xl p-6 flex items-center justify-between border border-gray-200 dark:border-gray-800 hover:shadow-lg transition-shadow"
+      className="bg-card text-card-foreground rounded-xl p-6 flex items-center justify-between border border-border hover:shadow-lg transition-shadow"
       style={{ fontFamily: 'Segoe UI, -apple-system, BlinkMacSystemFont, sans-serif' }}
     >
       <div>
-        <p className="text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider mb-2">{title}</p>
-        <p className="text-3xl font-bold text-gray-900 dark:text-white">{count}</p>
+        <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-2">{title}</p>
+        <p className="text-3xl font-bold text-card-foreground">{count}</p>
       </div>
 
       <div

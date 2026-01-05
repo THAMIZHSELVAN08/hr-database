@@ -45,12 +45,10 @@ export async function POST(req: NextRequest) {
     );
   }
 
-
   const REQUIRED_COLUMNS = [
     'HR Name',
     'Phone',
     'Company',
-    'Email',
   ];
 
   const headers = Object.keys(parsed.data[0] || {});
@@ -71,22 +69,22 @@ export async function POST(req: NextRequest) {
     const row: any = parsed.data[i];
 
     try {
-      const email = row['Email']?.trim();
+      const email = row['Email']?.trim() || null;
       const phone = row['Phone']?.trim();
 
-      if (!email || !phone) {
-        throw new Error('Email or Phone missing');
+      if (!phone) {
+        throw new Error('Phone missing');
       }
 
-      const dupCheck = await db.query(
-        `
-        SELECT id FROM hr_contacts
-        WHERE email = $1 OR phone = $2
-        `,
-        [email, phone]
-      );
+      const dupCheckQuery = email 
+        ? `SELECT id FROM hr_contacts WHERE email = $1 OR phone = $2`
+        : `SELECT id FROM hr_contacts WHERE phone = $1`;
+      
+      const dupCheckParams = email ? [email, phone] : [phone];
 
-      if (dupCheck.rowCount > 0) {
+      const dupCheck = await db.query(dupCheckQuery, dupCheckParams);
+
+      if ((dupCheck.rowCount ?? 0) > 0) {
         duplicates.push({ row: i + 2, email, phone });
         continue;
       }

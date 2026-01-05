@@ -1,26 +1,94 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: 239 246 255; 
+  --foreground: 23 23 23;
+  --card: 255 255 255;
+  --card-foreground: 23 23 23;
+  --primary: 79 70 229;
+  --primary-foreground: 255 255 255;
+  --secondary: 243 244 246;
+  --secondary-foreground: 23 23 23;
+  --muted: 243 244 246;
+  --muted-foreground: 115 115 115;
+  --accent: 243 244 246;
+  --accent-foreground: 23 23 23;
+  --border: 229 231 235;
+  --input: 229 231 235;
+  --ring: 79 70 229;
+  --heading: 30 64 175; 
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
+  --color-background: rgb(var(--background));
+  --color-foreground: rgb(var(--foreground));
+  --color-card: rgb(var(--card));
+  --color-card-foreground: rgb(var(--card-foreground));
+  --color-primary: rgb(var(--primary));
+  --color-primary-foreground: rgb(var(--primary-foreground));
+  --color-secondary: rgb(var(--secondary));
+  --color-secondary-foreground: rgb(var(--secondary-foreground));
+  --color-muted: rgb(var(--muted));
+  --color-muted-foreground: rgb(var(--muted-foreground));
+  --color-accent: rgb(var(--accent));
+  --color-accent-foreground: rgb(var(--accent-foreground));
+  --color-border: rgb(var(--border));
+  --color-input: rgb(var(--input));
+  --color-ring: rgb(var(--ring));
+  --color-heading: rgb(var(--heading));
   --font-sans: 'Segoe UI', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+.dark {
+  --background: 10 10 14;        
+  --foreground: 229 231 235;     
+  --card: 24 24 31;            
+  --card-foreground: 243 244 246;
+  --primary: 79 70 229;
+  --primary-foreground: 255 255 255;
+  --secondary: 17 24 39;
+  --secondary-foreground: 229 231 235;
+  --muted: 31 41 55;
+  --muted-foreground: 156 163 175;
+  --accent: 35 48 71;
+  --accent-foreground: 243 244 246;
+  --border: 31 41 55;
+  --input: 55 65 81;
+  --ring: 79 70 229;
+  --heading: 249 250 251;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
+  background: rgb(var(--background));
+  color: rgb(var(--foreground));
   font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+@keyframes page-sweep {
+  0% {
+    transform: scaleX(0);
+    opacity: 0;
+    transform-origin: left;
+  }
+  30% {
+    transform: scaleX(1);
+    opacity: 1;
+    transform-origin: left;
+  }
+  70% {
+    transform: scaleX(1);
+    opacity: 1;
+    transform-origin: right;
+  }
+  100% {
+    transform: scaleX(0);
+    opacity: 0;
+    transform-origin: right;
+  }
+}
+
+.page-transition-line {
+  animation: page-sweep 0.7s ease-out;
 }

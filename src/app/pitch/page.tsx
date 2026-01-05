@@ -109,62 +109,62 @@ export default function HRCallingScript() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-[#0a0e0f] px-6 py-12 relative">
+    <div className="min-h-screen bg-background px-6 py-12 relative">
       <button
         onClick={() => router.push(backUrl)}
-        className="fixed bottom-8 left-8 z-50 flex items-center gap-2 px-5 py-3 bg-[#1a2332] hover:bg-[#1f2937] text-blue-400 hover:text-blue-300 rounded-lg border border-blue-500/30 hover:border-blue-500/50 transition-all shadow-lg group"
+        className="fixed bottom-8 left-8 z-50 flex items-center gap-2 px-5 py-3 bg-card hover:bg-accent text-card-foreground rounded-lg border border-border transition-all shadow-lg group"
       >
         <ArrowLeft className="w-5 h-5 group-hover:-translate-x-1 transition-transform" />
         <span className="text-base font-medium">Back to Dashboard</span>
       </button>
 
       <div className="max-w-5xl mx-auto space-y-12">
-        <div className="bg-[#151a1e] rounded-lg shadow-xl p-8 border border-[#1f2937]">
-          <h1 className="text-4xl md:text-5xl font-bold text-white mb-6">
+        <div className="bg-card rounded-lg shadow-xl p-8 border border-border">
+          <h1 className="text-4xl md:text-5xl font-bold text-card-foreground mb-6">
             HR Calling Script
           </h1>
 
-          <div className="bg-[#1a2332] border-l-4 border-blue-500 p-4 mb-8">
-            <p className="text-lg font-semibold text-blue-400">
+          <div className="bg-muted border-l-4 border-primary p-4 mb-8">
+            <p className="text-lg font-semibold text-primary">
               Call the HR (Office Hours: 9 AM to 4 PM)
             </p>
           </div>
 
-          <div className="space-y-6 text-gray-300">
+          <div className="space-y-6 text-muted-foreground">
             <p className="text-lg">
               Good Morning/Good Afternoon. Am I speaking to (Mr./Ms.) (HR Name) from (COMPANY NAME)?
             </p>
 
             <div className="space-y-4">
-              <h2 className="text-xl font-bold text-white underline">If yes</h2>
+              <h2 className="text-xl font-bold text-card-foreground underline">If yes</h2>
               <p className="text-lg leading-relaxed">
                 Hello, (Sir/Ma'am). My name is{' '}
                 {loading ? (
-                  <span className="font-bold text-blue-400">Loading...</span>
+                  <span className="font-bold text-primary">Loading...</span>
                 ) : (
-                  <span className="font-bold text-blue-400">{studentName}</span>
+                  <span className="font-bold text-primary">{studentName}</span>
                 )}{' '}
                 and I am calling on behalf of Mr. Muraleedharan, Chief Placement Officer of Sri Venkateswara College of Engineering, Sriperumbudur. Could I please borrow 5 minutes of your time?
               </p>
             </div>
             <div className="space-y-4">
-              <h2 className="text-xl font-bold text-white underline">If no</h2>
+              <h2 className="text-xl font-bold text-card-foreground underline">If no</h2>
               <p className="text-lg">
                 I am so sorry for the disturbance, (Sir/Ma'am). What time is suitable to call you back?
               </p>
-              <p className="font-bold text-yellow-400">
+              <p className="font-bold text-yellow-500">
                 (Note down the time)
               </p>
               <p className="text-lg">
                 Thank you, (Sir/Ma'am).
               </p>
-              <p className="font-bold text-yellow-400">
+              <p className="font-bold text-yellow-500">
                 (End Call)
               </p>
             </div>
 
             <div className="space-y-4 mt-8">
-              <h2 className="text-xl font-bold text-white underline">If yes</h2>
+              <h2 className="text-xl font-bold text-card-foreground underline">If yes</h2>
               
               <p className="text-lg leading-relaxed">
                 Sir/Ma'am, we're organizing an event called the "MOCK PLACEMENTS" at our college. The event is conducted exclusively for the pre-final year students of our college, to help them prepare for their actual placements that will be held next academic year. Through this initiative, the students participate in a one-on-one interview-like setting with HR professionals, allowing them to understand the industry requirements and improve their interview skills.
@@ -195,7 +195,7 @@ export default function HRCallingScript() {
                   Do you have any questions for me, (Sir/Ma'am)?
                 </p>
                 
-                <p className="text-gray-500 text-base italic">
+                <p className="text-muted-foreground text-base italic">
                   (Refer FAQs)
                 </p>
                 
@@ -203,7 +203,7 @@ export default function HRCallingScript() {
                   Could I please have your E-Mail ID to send you a formal invite?
                 </p>
                 
-                <p className="font-bold text-yellow-400">
+                <p className="font-bold text-yellow-500">
                   (Note down the mail ID)
                 </p>
                 
@@ -215,7 +215,7 @@ export default function HRCallingScript() {
                   Thank you so much for your time and patience. Have a nice day (Sir/Ma'am).
                 </p>
                 
-                <p className="font-bold text-yellow-400">
+                <p className="font-bold text-yellow-500">
                   (End Call)
                 </p>
               </div>
@@ -223,8 +223,8 @@ export default function HRCallingScript() {
           </div>
         </div>
 
-        <div className="bg-[#151a1e] rounded-lg shadow-xl p-8 border border-[#1f2937]">
-          <h2 className="text-3xl md:text-4xl font-bold text-white mb-8">
+        <div className="bg-card rounded-lg shadow-xl p-8 border border-border">
+          <h2 className="text-3xl md:text-4xl font-bold text-card-foreground mb-8">
             Frequently Asked Questions
           </h2>
 
@@ -232,27 +232,27 @@ export default function HRCallingScript() {
             {FAQ_DATA.map((item, index) => (
               <div
                 key={index}
-                className="border border-[#1f2937] rounded-lg overflow-hidden hover:shadow-lg transition-shadow bg-[#1a1f24]"
+                className="border border-border rounded-lg overflow-hidden hover:shadow-lg transition-shadow bg-card"
               >
                 <button
                   onClick={() =>
                     setExpandedIndex(expandedIndex === index ? null : index)
                   }
-                  className="w-full px-6 py-5 flex items-center justify-between bg-[#1a2332] hover:bg-[#1f2937] transition-colors"
+                  className="w-full px-6 py-5 flex items-center justify-between bg-muted hover:bg-accent transition-colors"
                 >
-                  <span className="text-lg font-semibold text-gray-200 text-left">
+                  <span className="text-lg font-semibold text-card-foreground text-left">
                     {item.question}
                   </span>
                   {expandedIndex === index ? (
-                    <ChevronUp className="w-6 h-6 text-blue-400 shrink-0 ml-4" />
+                    <ChevronUp className="w-6 h-6 text-primary shrink-0 ml-4" />
                   ) : (
-                    <ChevronDown className="w-6 h-6 text-gray-500 shrink-0 ml-4" />
+                    <ChevronDown className="w-6 h-6 text-muted-foreground shrink-0 ml-4" />
                   )}
                 </button>
 
                 {expandedIndex === index && (
-                  <div className="px-6 py-5 bg-[#151a1e] border-t border-[#1f2937]">
-                    <p className="text-gray-300 text-lg leading-relaxed">
+                  <div className="px-6 py-5 bg-card border-t border-border">
+                    <p className="text-muted-foreground text-lg leading-relaxed">
                       {item.answer}
                     </p>
                   </div>

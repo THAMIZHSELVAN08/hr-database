@@ -48,7 +48,7 @@ export default async function DashboardLayout({
 
   return (
     <div 
-      className="min-h-screen bg-gray-50 dark:bg-[#0B0F05] text-gray-900 dark:text-white transition-colors"
+      className="min-h-screen bg-background text-foreground transition-colors"
       style={{ fontFamily: 'Segoe UI, -apple-system, BlinkMacSystemFont, sans-serif' }}
     >
       <TopBar username={user.name || user.username || user.email} stats={stats} />

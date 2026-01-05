@@ -24,17 +24,9 @@ const STATUSES = [
   'Wrong Number',
 ];
 
-const COLORS: Record<string, string> = {
-  'Accepted Invite': '#14F287',
-  'Awaiting Response': '#7C57E6',
-  'Email Sent': '#805FF4',
-  'Called Declined': '#BE7C43',
-  'Emailed Declined': '#EF4444',
-  'Blacklisted': '#6B7280',
-  'Wrong Number': '#F97316',
-  'Call Postponed': '#38BDF8',
-  'Not Reachable': '#A855F7',
-};
+import { STATUS_COLORS } from '@/lib/statusColors';
+
+const COLORS = STATUS_COLORS;
 
 function buildContactsPerMember(raw: any[]) {
   const map: Record<string, any> = {};
@@ -57,7 +49,7 @@ function CustomTooltip({ active, payload, label }: any) {
   if (filtered.length === 0) return null;
 
   return (
-    <div className="bg-[#0A0A0A] text-white p-4 rounded-xl border border-gray-700/50 shadow-2xl">
+    <div className="bg-card text-card-foreground p-4 rounded-xl border border-border shadow-2xl">
       <p className="font-semibold mb-2 text-sm tracking-tight">{label}</p>
       <div className="space-y-1">
         {filtered.map((item: any) => (
@@ -80,12 +72,12 @@ export default function AdminCharts({ data }: { data: any }) {
 
   return (
     <div className="p-8 space-y-8" style={{ fontFamily: '"Segoe UI", system-ui, sans-serif' }}>
-      <div className="bg-[#0A0A0A] rounded-2xl border border-gray-800/50 p-8 shadow-2xl">
+      <div className="bg-card rounded-2xl border border-border/50 p-8 shadow-md">
         <div className="mb-6">
-          <h2 className="text-2xl font-semibold text-white mb-2 tracking-tight">
+          <h2 className="text-2xl font-semibold text-heading mb-2 tracking-tight">
             Contacts per Member
           </h2>
-          <p className="text-gray-400 text-sm font-normal">
+          <p className="text-muted-foreground text-sm font-normal">
             Distribution of contact statuses across team members
           </p>
         </div>
@@ -128,12 +120,12 @@ export default function AdminCharts({ data }: { data: any }) {
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
 
-        <div className="bg-[#0A0A0A] rounded-2xl border border-gray-800/50 p-8 shadow-2xl">
+        <div className="bg-card rounded-2xl border border-border/50 p-8 shadow-md">
           <div className="mb-6">
-            <h2 className="text-2xl font-semibold text-white mb-2 tracking-tight">
+            <h2 className="text-2xl font-semibold text-heading mb-2 tracking-tight">
               Status Distribution
             </h2>
-            <p className="text-gray-400 text-sm font-normal">
+            <p className="text-muted-foreground text-sm font-normal">
               Overall breakdown of contact statuses
             </p>
           </div>
@@ -167,11 +159,11 @@ export default function AdminCharts({ data }: { data: any }) {
                 content={({ active, payload }) => {
                   if (!active || !payload?.[0]) return null;
                   return (
-                    <div className="bg-[#0A0A0A] border border-gray-700/50 rounded-xl p-3 shadow-xl">
-                      <p className="text-white font-semibold text-sm mb-1">
+                    <div className="bg-card border border-border rounded-xl p-3 shadow-xl">
+                      <p className="text-card-foreground font-semibold text-sm mb-1">
                         {payload[0].name}
                       </p>
-                      <p className="text-gray-300 text-sm">
+                      <p className="text-muted-foreground text-sm">
                         Count: <span className="font-medium">{payload[0].value}</span>
                       </p>
                     </div>
@@ -187,7 +179,7 @@ export default function AdminCharts({ data }: { data: any }) {
                   className="w-3 h-3 rounded-sm shrink-0" 
                   style={{ backgroundColor: COLORS[entry.status] ?? '#8884d8' }}
                 />
-                <span className="text-gray-300 text-sm font-normal truncate">
+                <span className="text-muted-foreground text-sm font-normal truncate">
                   {entry.status} ({entry.count})
                 </span>
               </div>
@@ -195,12 +187,12 @@ export default function AdminCharts({ data }: { data: any }) {
           </div>
         </div>
 
-        <div className="bg-[#0A0A0A] rounded-2xl border border-gray-800/50 p-8 shadow-2xl">
+        <div className="bg-card rounded-2xl border border-border/50 p-8 shadow-md">
           <div className="mb-6">
-            <h2 className="text-2xl font-semibold text-white mb-2 tracking-tight">
+            <h2 className="text-2xl font-semibold text-heading mb-2 tracking-tight">
               Member Distribution
             </h2>
-            <p className="text-gray-400 text-sm font-normal">
+            <p className="text-muted-foreground text-sm font-normal">
               Contact count per team member
             </p>
           </div>
@@ -237,11 +229,11 @@ export default function AdminCharts({ data }: { data: any }) {
                 content={({ active, payload }) => {
                   if (!active || !payload?.[0]) return null;
                   return (
-                    <div className="bg-[#0A0A0A] border border-gray-700/50 rounded-xl p-3 shadow-xl">
-                      <p className="text-white font-semibold text-sm mb-1">
+                    <div className="bg-card border border-border rounded-xl p-3 shadow-xl">
+                      <p className="text-card-foreground font-semibold text-sm mb-1">
                         {payload[0].name}
                       </p>
-                      <p className="text-gray-300 text-sm">
+                      <p className="text-muted-foreground text-sm">
                         Count: <span className="font-medium">{payload[0].value}</span>
                       </p>
                     </div>
@@ -260,7 +252,7 @@ export default function AdminCharts({ data }: { data: any }) {
                     className="w-3 h-3 rounded-sm shrink-0" 
                     style={{ backgroundColor: colors[i % colors.length] }}
                   />
-                  <span className="text-gray-300 text-sm font-normal truncate">
+                  <span className="text-muted-foreground text-sm font-normal truncate">
                     {entry.name} ({entry.count})
                   </span>
                 </div>

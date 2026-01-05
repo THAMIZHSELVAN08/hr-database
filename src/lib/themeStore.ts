@@ -10,9 +10,30 @@ interface ThemeStore {
 export const useThemeStore = create<ThemeStore>()(
   persist(
     (set) => ({
-      isDarkMode: true,
-      toggle: () => set((state) => ({ isDarkMode: !state.isDarkMode })),
-      setDarkMode: (isDark: boolean) => set({ isDarkMode: isDark }),
+      isDarkMode: false,
+      toggle: () => {
+        set((state) => {
+          const newMode = !state.isDarkMode;
+          if (typeof document !== 'undefined') {
+            if (newMode) {
+              document.documentElement.classList.add('dark');
+            } else {
+              document.documentElement.classList.remove('dark');
+            }
+          }
+          return { isDarkMode: newMode };
+        });
+      },
+      setDarkMode: (isDark: boolean) => {
+        set({ isDarkMode: isDark });
+        if (typeof document !== 'undefined') {
+          if (isDark) {
+            document.documentElement.classList.add('dark');
+          } else {
+            document.documentElement.classList.remove('dark');
+          }
+        }
+      },
     }),
     {
       name: 'theme-storage',

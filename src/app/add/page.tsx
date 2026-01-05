@@ -17,8 +17,8 @@ export default function AddHRPage() {
   return (
     <div className="min-h-screen p-8 max-w-7xl mx-auto" style={{ fontFamily: '"Segoe UI", system-ui, sans-serif' }}>
       <div className="mb-10">
-        <h1 className="text-4xl font-semibold text-white mb-3 tracking-tight">Add HR Records</h1>
-        <p className="text-gray-400 text-base font-normal">Choose your preferred method to add new HR contacts to the database</p>
+        <h1 className="text-4xl font-semibold text-foreground mb-3 tracking-tight">Add HR Records</h1>
+        <p className="text-muted-foreground text-base font-normal">Choose your preferred method to add new HR contacts to the database</p>
       </div>
 
       <div className="flex gap-4 mb-8">
@@ -26,8 +26,8 @@ export default function AddHRPage() {
           onClick={() => setTab('csv')}
           className={`group relative px-8 py-4 rounded-xl font-medium transition-all duration-300 ${
             tab === 'csv'
-              ? 'bg-linear-to-r from-purple-600 to-blue-600 text-white shadow-lg shadow-purple-600/30'
-              : 'bg-gray-900/50 hover:bg-gray-900/70 text-gray-300 border border-gray-800/50 hover:border-gray-700/50'
+              ? 'bg-primary text-primary-foreground shadow-lg'
+              : 'bg-muted hover:bg-accent text-muted-foreground border border-border hover:border-border/80'
           }`}
         >
           <div className="flex items-center gap-3">
@@ -38,7 +38,7 @@ export default function AddHRPage() {
             <span className="tracking-tight">Upload CSV</span>
           </div>
           {tab === 'csv' && (
-            <div className="absolute bottom-0 left-0 right-0 h-1 bg-linear-to-r from-purple-400 to-blue-400 rounded-full"></div>
+            <div className="absolute bottom-0 left-0 right-0 h-1 bg-primary rounded-full"></div>
           )}
         </button>
 
@@ -46,8 +46,8 @@ export default function AddHRPage() {
           onClick={() => setTab('manual')}
           className={`group relative px-8 py-4 rounded-xl font-medium transition-all duration-300 ${
             tab === 'manual'
-              ? 'bg-linear-to-r from-purple-600 to-blue-600 text-white shadow-lg shadow-purple-600/30'
-              : 'bg-gray-900/50 hover:bg-gray-900/70 text-gray-300 border border-gray-800/50 hover:border-gray-700/50'
+              ? 'bg-primary text-primary-foreground shadow-lg'
+              : 'bg-muted hover:bg-accent text-muted-foreground border border-border hover:border-border/80'
           }`}
         >
           <div className="flex items-center gap-3">
@@ -58,7 +58,7 @@ export default function AddHRPage() {
             <span className="tracking-tight">Add Manually</span>
           </div>
           {tab === 'manual' && (
-            <div className="absolute bottom-0 left-0 right-0 h-1 bg-linear-to-r from-purple-400 to-blue-400 rounded-full"></div>
+            <div className="absolute bottom-0 left-0 right-0 h-1 bg-primary rounded-full"></div>
           )}
         </button>
       </div>
@@ -68,10 +68,10 @@ export default function AddHRPage() {
         {tab === 'manual' && <ManualAddForm />}
       </div>
 
-      <div className="mt-8 pt-6 border-t border-gray-800/50">
+      <div className="mt-8 pt-6 border-t border-border">
         <button
           onClick={handleBackToDashboard}
-          className="inline-flex items-center gap-2 px-6 py-3 bg-gray-900/50 hover:bg-gray-900/70 text-gray-300 hover:text-white rounded-lg font-medium transition-all duration-200 border border-gray-800/50 hover:border-gray-700/50"
+          className="inline-flex items-center gap-2 px-6 py-3 bg-muted hover:bg-accent text-muted-foreground hover:text-accent-foreground rounded-lg font-medium transition-all duration-200 border border-border hover:border-border/80"
         >
           <ArrowLeft className="w-5 h-5" strokeWidth={2} />
           <span>Back to Dashboard</span>

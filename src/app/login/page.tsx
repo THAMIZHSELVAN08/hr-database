@@ -15,7 +15,7 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-[#0a0e0f] p-6">
+    <div className="min-h-screen flex items-center justify-center bg-background p-6">
       <div className="w-full max-w-md">
         <div className="flex justify-center mb-12">
           <img 
@@ -25,18 +25,18 @@ export default function LoginPage() {
           />
         </div>
 
-        <div className="bg-[#151a1e] rounded-xl shadow-2xl p-10 border border-[#1f2937]">
-          <h1 className="text-2xl font-bold text-white text-center mb-2">
+        <div className="bg-card rounded-xl shadow-2xl p-10 border border-border">
+          <h1 className="text-2xl font-bold text-card-foreground text-center mb-2">
             HR Database Login
           </h1>
           
-          <p className="text-gray-400 text-center text-sm mb-8">
+          <p className="text-muted-foreground text-center text-sm mb-8">
             Login with your Google account to access the HR database
           </p>
 
           <button
             onClick={redirectToGoogle}
-            className="w-full bg-white hover:bg-gray-50 text-gray-700 font-medium py-3.5 px-6 rounded-lg shadow-md transition-all duration-200 flex items-center justify-center gap-3 border border-gray-200 hover:shadow-lg active:scale-[0.98]"
+            className="w-full bg-card hover:bg-accent text-card-foreground font-medium py-3.5 px-6 rounded-lg shadow-md transition-all duration-200 flex items-center justify-center gap-3 border border-border hover:shadow-lg active:scale-[0.98]"
           >
             <svg width="20" height="20" viewBox="0 0 24 24">
               <path

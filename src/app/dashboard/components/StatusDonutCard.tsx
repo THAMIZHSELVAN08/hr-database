@@ -1,6 +1,7 @@
 'use client';
 
 import { PieChart, Pie, Cell, ResponsiveContainer } from 'recharts';
+import { STATUS_COLORS } from '@/lib/statusColors';
 
 interface StatusDonutCardProps {
   label: string;
@@ -21,21 +22,14 @@ export default function StatusDonutCard({
     { name: 'empty', value: total - value },
   ];
 
-  const colorMap: Record<string, string> = {
-    'Email Sent': '#a855f7',
-    'Awaiting Response': '#4f46e5',
-    'Call Postponed': '#06b6d4',
-    'Wrong Number': '#f97316',
-  };
-
-  const fillColor = colorMap[label] || '#6b7280';
+  const fillColor = STATUS_COLORS[label] || '#6b7280';
 
   return (
     <div 
-      className="bg-white dark:bg-[#111111] rounded-xl p-6 border border-gray-200 dark:border-gray-800 hover:shadow-lg transition-all hover:border-gray-300 dark:hover:border-gray-700"
+      className="bg-card text-card-foreground rounded-xl p-6 border border-border hover:shadow-lg transition-all hover:border-border/80"
       style={{ fontFamily: 'Segoe UI, -apple-system, BlinkMacSystemFont, sans-serif' }}
     >
-      <h3 className="text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider mb-4">{label}</h3>
+      <h3 className="text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-4">{label}</h3>
 
       <ResponsiveContainer width="100%" height={140}>
         <PieChart>
@@ -57,8 +51,8 @@ export default function StatusDonutCard({
       </ResponsiveContainer>
 
       <div className="text-center mt-3">
-        <div className="text-3xl font-bold text-gray-900 dark:text-white mb-1">{value}</div>
-        <div className="text-xs text-gray-500 dark:text-gray-400">
+        <div className="text-3xl font-bold text-card-foreground mb-1">{value}</div>
+        <div className="text-xs text-muted-foreground">
           {percentage}% of {total} total
         </div>
       </div>

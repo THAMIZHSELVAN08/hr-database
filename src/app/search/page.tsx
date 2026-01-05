@@ -19,7 +19,7 @@ export default async function SearchPage() {
 
   return (
     <div
-      className="min-h-screen bg-[#0B0F05] px-6 py-10 text-white"
+      className="min-h-screen bg-background px-6 py-10 text-foreground"
       style={{ fontFamily: 'Segoe UI, -apple-system, BlinkMacSystemFont, sans-serif' }}
     >
       <div className="max-w-7xl mx-auto space-y-8">
@@ -32,7 +32,7 @@ export default async function SearchPage() {
         <div className="pt-6 flex justify-center">
           <a
             href="/dashboard"
-            className="inline-flex items-center gap-2 rounded-lg border border-gray-700 bg-gray-900 px-6 py-3 text-base font-medium hover:bg-gray-800 transition"
+            className="inline-flex items-center gap-2 rounded-lg border border-border bg-card px-6 py-3 text-base font-medium hover:bg-accent transition text-card-foreground"
           >
             <svg
               className="w-5 h-5"

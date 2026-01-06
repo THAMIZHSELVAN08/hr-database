@@ -38,7 +38,7 @@ export default function SearchClient({ contacts }: { contacts: any[] }) {
 
   return (
     <>
-      <div className="rounded-xl border border-border bg-card p-6 space-y-5">
+      <div className="app-card app-card-hover p-6 space-y-5">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
           <Input
             label="Search All Fields"

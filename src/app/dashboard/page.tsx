@@ -73,8 +73,8 @@ export default async function DashboardPage() {
         ))}
       </div>
 
-      <div className="mb-6">
-        <h3 className="text-lg font-semibold text-foreground mb-4">
+          <div className="mb-6">
+            <h3 className="text-lg font-semibold text-heading mb-4">
           All Contacts
         </h3>
       </div>

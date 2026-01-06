@@ -11,8 +11,8 @@
   --secondary-foreground: 23 23 23;
   --muted: 243 244 246;
   --muted-foreground: 115 115 115;
-  --accent: 243 244 246;
-  --accent-foreground: 23 23 23;
+  --accent: 30 64 175; 
+  --accent-foreground: 255 255 255; 
   --border: 229 231 235;
   --input: 229 231 235;
   --ring: 79 70 229;
@@ -41,22 +41,22 @@
 }
 
 .dark {
-  --background: 10 10 14;        
-  --foreground: 229 231 235;     
-  --card: 24 24 31;            
-  --card-foreground: 243 244 246;
-  --primary: 79 70 229;
-  --primary-foreground: 255 255 255;
-  --secondary: 17 24 39;
-  --secondary-foreground: 229 231 235;
-  --muted: 31 41 55;
-  --muted-foreground: 156 163 175;
-  --accent: 35 48 71;
-  --accent-foreground: 243 244 246;
-  --border: 31 41 55;
-  --input: 55 65 81;
-  --ring: 79 70 229;
-  --heading: 249 250 251;
+  --background: 8 8 12;          
+  --foreground: 233 236 242;     
+  --card: 16 22 36;              
+  --card-foreground: 240 243 248;
+  --primary: 62 102 215;         
+  --primary-foreground: 238 242 255;
+  --secondary: 18 28 48;         
+  --secondary-foreground: 230 235 244;
+  --muted: 22 32 52;             
+  --muted-foreground: 170 178 196;
+  --accent: 30 64 175;           
+  --accent-foreground: 226 232 247; 
+  --border: 32 46 72;            
+  --input: 44 62 96;             
+  --ring: 62 102 215;            
+  --heading: 235 240 250;        
 }
 
 body {
@@ -64,6 +64,24 @@ body {
   color: rgb(var(--foreground));
   font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
   transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+@layer components {
+  .app-card {
+    @apply rounded-2xl border border-border bg-card shadow-lg/70;
+  }
+
+  .app-card-hover {
+    @apply transition-all duration-200 hover:-translate-y-0.5 hover:shadow-xl hover:border-border/80;
+  }
+
+  .app-icon-btn {
+    @apply p-2.5 rounded-xl border border-border bg-card/70 text-muted-foreground hover:text-heading hover:bg-accent hover:shadow-md transition-all;
+  }
+
+  .app-nav-link {
+    @apply flex items-center gap-3 px-4 py-3.5 rounded-xl border border-transparent text-card-foreground hover:border-border hover:bg-accent hover:text-accent-foreground transition-all font-medium shadow-sm;
+  }
 }
 
 @keyframes page-sweep {

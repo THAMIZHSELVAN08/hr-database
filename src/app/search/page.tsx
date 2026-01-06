@@ -23,7 +23,7 @@ export default async function SearchPage() {
       style={{ fontFamily: 'Segoe UI, -apple-system, BlinkMacSystemFont, sans-serif' }}
     >
       <div className="max-w-7xl mx-auto space-y-8">
-        <h1 className="text-3xl md:text-4xl font-bold tracking-tight">
+        <h1 className="text-3xl md:text-4xl font-bold tracking-tight text-heading">
           Search HR Contacts
         </h1>
 
@@ -32,7 +32,7 @@ export default async function SearchPage() {
         <div className="pt-6 flex justify-center">
           <a
             href="/dashboard"
-            className="inline-flex items-center gap-2 rounded-lg border border-border bg-card px-6 py-3 text-base font-medium hover:bg-accent transition text-card-foreground"
+            className="inline-flex items-center gap-2 rounded-lg border border-border bg-card px-6 py-3 text-base font-medium hover:bg-accent transition text-heading"
           >
             <svg
               className="w-5 h-5"

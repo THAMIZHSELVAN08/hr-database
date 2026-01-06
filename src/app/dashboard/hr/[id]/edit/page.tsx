@@ -488,7 +488,7 @@ export default function HREditPage({ params }: { params: Promise<{ id: string }>
           <div className="flex gap-4 pt-6 border-t border-border">
             <Link
               href="/dashboard"
-              className="text-primary hover:text-primary/80 font-semibold"
+              className="text-heading hover:text-heading/90 font-semibold"
             >
               Back to HR Database
             </Link>

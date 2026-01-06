@@ -5,8 +5,9 @@ import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { TEAMS, getTeamDataByEmail } from './TeamData';
 
-const INTERVIEW_MODES = ['Online', 'Offline', 'Both'];
+const INTERVIEW_MODES = ['Select Mode', 'Online', 'Offline', 'Both'];
 const STATUS_OPTIONS = [
+  'Select Status',
   'Awaiting Response',
   'Accepted Invite',
   'Email Sent',
@@ -35,15 +36,15 @@ export default function ManualAddForm() {
     hr_name: '',
     phone: '',
     email: '',
-    interview_mode: 'Online',
+    interview_mode: 'Select Mode',
     company: '',
     member_name: '',
     member_email: '',
     incharge: '',
     incharge_email: '',
-    status: 'Awaiting Response',
+    status: 'Select Status',
     hr_count: '1',
-    transport: 'None',
+    transport: '',
     address: '',
     internship: 'No',
     remark: '',
@@ -169,7 +170,7 @@ export default function ManualAddForm() {
       )}
 
       {success && (
-        <div className="mb-6 p-5 bg-green-900/20 border border-green-600/50 rounded-xl text-green-300 shadow-lg shadow-green-900/10">
+        <div className="mb-6 p-5 bg-blue-900/20 border border-blue-600/50 rounded-xl text-blue-300 shadow-lg shadow-blue-900/10">
           <p className="font-medium text-sm">✅ HR Record added successfully! Redirecting...</p>
         </div>
       )}

@@ -112,7 +112,7 @@ export default function HRCallingScript() {
     <div className="min-h-screen bg-background px-6 py-12 relative">
       <button
         onClick={() => router.push(backUrl)}
-        className="fixed bottom-8 left-8 z-50 flex items-center gap-2 px-5 py-3 bg-card hover:bg-accent text-card-foreground rounded-lg border border-border transition-all shadow-lg group"
+        className="fixed bottom-8 left-8 z-50 flex items-center gap-2 px-5 py-3 bg-card hover:bg-accent text-heading rounded-lg border border-border transition-all shadow-lg group"
       >
         <ArrowLeft className="w-5 h-5 group-hover:-translate-x-1 transition-transform" />
         <span className="text-base font-medium">Back to Dashboard</span>
@@ -120,7 +120,7 @@ export default function HRCallingScript() {
 
       <div className="max-w-5xl mx-auto space-y-12">
         <div className="bg-card rounded-lg shadow-xl p-8 border border-border">
-          <h1 className="text-4xl md:text-5xl font-bold text-card-foreground mb-6">
+          <h1 className="text-4xl md:text-5xl font-bold text-heading mb-6">
             HR Calling Script
           </h1>
 
@@ -136,7 +136,9 @@ export default function HRCallingScript() {
             </p>
 
             <div className="space-y-4">
-              <h2 className="text-xl font-bold text-card-foreground underline">If yes</h2>
+              <h2 className="text-2xl font-bold text-heading dark:text-card-foreground underline">
+                If yes
+              </h2>
               <p className="text-lg leading-relaxed">
                 Hello, (Sir/Ma'am). My name is{' '}
                 {loading ? (
@@ -148,7 +150,9 @@ export default function HRCallingScript() {
               </p>
             </div>
             <div className="space-y-4">
-              <h2 className="text-xl font-bold text-card-foreground underline">If no</h2>
+              <h2 className="text-2xl font-bold text-heading dark:text-card-foreground underline">
+                If no
+              </h2>
               <p className="text-lg">
                 I am so sorry for the disturbance, (Sir/Ma'am). What time is suitable to call you back?
               </p>
@@ -164,7 +168,9 @@ export default function HRCallingScript() {
             </div>
 
             <div className="space-y-4 mt-8">
-              <h2 className="text-xl font-bold text-card-foreground underline">If yes</h2>
+              <h2 className="text-2xl font-bold text-heading dark:text-card-foreground underline">
+                If yes
+              </h2>
               
               <p className="text-lg leading-relaxed">
                 Sir/Ma'am, we're organizing an event called the "MOCK PLACEMENTS" at our college. The event is conducted exclusively for the pre-final year students of our college, to help them prepare for their actual placements that will be held next academic year. Through this initiative, the students participate in a one-on-one interview-like setting with HR professionals, allowing them to understand the industry requirements and improve their interview skills.

@@ -49,7 +49,7 @@ function highlightText(text: string, searchTerms: SearchTerms): React.ReactNode 
     
     if (isMatch) {
       return (
-        <span key={index} className="bg-yellow-400 text-black font-semibold px-1 rounded">
+        <span key={index} className="bg-accent text-accent-foreground font-semibold px-1 rounded">
           {part}
         </span>
       );
@@ -84,7 +84,7 @@ export default function HRTableWithHighlight({ contacts, searchTerms = {} }: HRT
   }
 
   return (
-    <div className="rounded-xl border border-border bg-card overflow-hidden shadow-sm">
+    <div className="app-card overflow-hidden">
       <div className="overflow-x-auto">
         <table className="w-full">
           <thead className="bg-secondary border-b border-border">
@@ -113,7 +113,7 @@ export default function HRTableWithHighlight({ contacts, searchTerms = {} }: HRT
             {contacts.map((contact, idx) => (
               <tr 
                 key={contact.id || idx}
-                className="hover:bg-accent transition-colors"
+                className="hover:bg-muted/40 transition-colors"
               >
                 <td className="px-6 py-4 text-sm text-card-foreground">
                   {highlightText(contact.hr_name, searchTerms)}

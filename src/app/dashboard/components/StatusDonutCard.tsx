@@ -29,7 +29,7 @@ export default function StatusDonutCard({
       className="bg-card text-card-foreground rounded-xl p-6 border border-border hover:shadow-lg transition-all hover:border-border/80"
       style={{ fontFamily: 'Segoe UI, -apple-system, BlinkMacSystemFont, sans-serif' }}
     >
-      <h3 className="text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-4">{label}</h3>
+      <h3 className="text-xs font-semibold text-heading uppercase tracking-wider mb-4">{label}</h3>
 
       <ResponsiveContainer width="100%" height={140}>
         <PieChart>

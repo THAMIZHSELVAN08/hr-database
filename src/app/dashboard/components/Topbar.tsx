@@ -92,14 +92,14 @@ export default function TopBar({ username, stats }: TopBarProps) {
         <div className="flex items-center gap-4">
           <button
             onClick={toggle}
-            className="p-2.5 text-muted-foreground hover:text-card-foreground hover:bg-accent rounded-lg transition-all"
+            className="app-icon-btn"
             title="Toggle Menu"
           >
             <Menu className="w-6 h-6" />
           </button>
 
-          <span className="font-semibold text-card-foreground text-lg md:text-xl">
-            Hello, <span className="font-bold">{username}</span>
+          <span className="font-semibold text-heading text-lg md:text-xl">
+            Hello, <span className="font-semibold text-heading">{username}</span>
           </span>
         </div>
 
@@ -112,7 +112,7 @@ export default function TopBar({ username, stats }: TopBarProps) {
             className="h-14 w-auto"
             priority
           />
-          <h1 className="text-2xl font-bold text-card-foreground tracking-tight">
+          <h1 className="text-2xl font-bold text-heading tracking-tight">
             HR DATABASE
           </h1>
         </div>
@@ -122,7 +122,7 @@ export default function TopBar({ username, stats }: TopBarProps) {
             <>
               <Link
                 href="/dashboard"
-                className="p-2.5 text-muted-foreground hover:text-card-foreground hover:bg-accent rounded-lg transition-all"
+                className="app-icon-btn"
                 title="Dashboard"
               >
                 <Home className="w-6 h-6" />
@@ -130,7 +130,7 @@ export default function TopBar({ username, stats }: TopBarProps) {
 
               <Link
                 href="/search"
-                className="p-2.5 text-muted-foreground hover:text-card-foreground hover:bg-accent rounded-lg transition-all"
+                className="app-icon-btn"
                 title="Search"
               >
                 <Search className="w-6 h-6" />
@@ -138,7 +138,7 @@ export default function TopBar({ username, stats }: TopBarProps) {
 
               <Link
                 href="/add"
-                className="p-2.5 text-muted-foreground hover:text-card-foreground hover:bg-accent rounded-lg transition-all"
+                className="app-icon-btn"
                 title="Add New"
               >
                 <Plus className="w-6 h-6" />
@@ -146,7 +146,7 @@ export default function TopBar({ username, stats }: TopBarProps) {
 
               <Link
                 href="/notifications"
-                className="relative p-2.5 text-muted-foreground hover:text-card-foreground hover:bg-accent rounded-lg transition-all"
+                className="relative app-icon-btn"
                 title="Notifications"
               >
                 <Bell className="w-6 h-6" />
@@ -160,7 +160,7 @@ export default function TopBar({ username, stats }: TopBarProps) {
 
               <button
                 onClick={() => setShowStatsModal(true)}
-                className="p-2.5 text-muted-foreground hover:text-card-foreground hover:bg-accent rounded-lg transition-all"
+                className="app-icon-btn"
                 title="Statistics"
               >
                 <BarChart3 className="w-6 h-6" />
@@ -171,7 +171,7 @@ export default function TopBar({ username, stats }: TopBarProps) {
           <div className="ml-2 pl-2 border-l border-border flex items-center gap-2">
             <button
               onClick={toggleTheme}
-              className="p-2.5 text-muted-foreground hover:text-card-foreground hover:bg-accent rounded-lg transition-all"
+              className="app-icon-btn"
               title={isDarkMode ? 'Switch to Light Mode' : 'Switch to Dark Mode'}
             >
               {isDarkMode ? (
@@ -182,7 +182,7 @@ export default function TopBar({ username, stats }: TopBarProps) {
             </button>
             <Link
               href="/pitch"
-              className="px-4 py-2 text-base font-semibold text-primary border border-primary rounded-lg hover:bg-accent active:bg-accent/80 transition-all shadow-sm"
+              className="px-4 py-2 text-sm font-semibold text-primary border border-border bg-card/70 rounded-xl hover:bg-accent hover:text-accent-foreground active:bg-accent/80 transition-all shadow-md"
             >
               HR PITCH
             </Link>

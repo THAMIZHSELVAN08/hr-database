@@ -146,6 +146,20 @@ export default function HREditPage({ params }: { params: Promise<{ id: string }>
       setFormData((prev) => ({ ...prev, callback_date: undefined }));
     }
     
+    if (name === 'hr_count') {
+      // Allow empty field while typing, otherwise clamp to at least 1
+      if (value === '') {
+        setFormData((prev) => ({ ...prev, hr_count: undefined }));
+        return;
+      }
+
+      const numeric = parseInt(value, 10);
+      const safeValue = isNaN(numeric) ? 1 : Math.max(1, numeric);
+
+      setFormData((prev) => ({ ...prev, hr_count: safeValue }));
+      return;
+    }
+
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
@@ -473,6 +487,7 @@ export default function HREditPage({ params }: { params: Promise<{ id: string }>
                   name="hr_count"
                   value={formData.hr_count || ''}
                   onChange={handleChange}
+                min={1}
                   className="w-full px-3 py-2 bg-background border border-input rounded text-foreground focus:outline-none focus:ring-2 focus:ring-ring"
                 />
               </div>

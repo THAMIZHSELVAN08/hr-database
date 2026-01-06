@@ -96,6 +96,15 @@ export default function ManualAddForm() {
     >
   ) => {
     const { name, value } = e.target;
+
+    if (name === 'hr_count') {
+      // Prevent negative or zero values; default to 1
+      const numeric = parseInt(value || '1', 10);
+      const safeValue = isNaN(numeric) ? '1' : String(Math.max(1, numeric));
+      setFormData((prev) => ({ ...prev, hr_count: safeValue }));
+      return;
+    }
+
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
@@ -344,6 +353,7 @@ export default function ManualAddForm() {
                 name="hr_count"
                 value={formData.hr_count}
                 onChange={handleChange}
+                min={1}
                 className="w-full px-4 py-3 bg-background border border-input rounded-xl text-foreground placeholder-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:border-ring transition-all duration-200"
                 required
               />

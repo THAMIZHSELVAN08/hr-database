@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
+import { getTeamDataByEmail, getAllTeamMembers } from '@/app/add/components/TeamData';
 
 const STATUS_OPTIONS = [
   'Select Status',
@@ -20,6 +21,13 @@ const STATUS_OPTIONS = [
 const INTERVIEW_MODES = ['Select Mode', 'Online', 'Offline', 'Both'];
 const TRANSPORT_OPTIONS = ['None', 'Own', 'Required'];
 const INTERNSHIP_OPTIONS = ['Yes', 'No'];
+
+// Define transfer exceptions - emails that have transfer permissions
+const TRANSFER_EXCEPTIONS: string[] = [
+  'admin@example.com',
+  'superadmin@example.com',
+  // Add your super admin emails here
+];
 
 type HRContact = {
   id: number;
@@ -42,6 +50,13 @@ type HRContact = {
   callback_time?: string;
 };
 
+type TeamMember = {
+  name: string;
+  email: string;
+  incharge: string;
+  inchargeEmail: string;
+};
+
 export default function HREditPage({ params }: { params: Promise<{ id: string }> }) {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
@@ -51,20 +66,59 @@ export default function HREditPage({ params }: { params: Promise<{ id: string }>
   const [selectedDate, setSelectedDate] = useState('');
   const [selectedTime, setSelectedTime] = useState({ hour: '09', minute: '00', period: 'AM' });
   const [currentMonth, setCurrentMonth] = useState(new Date());
+  const [currentUserEmail, setCurrentUserEmail] = useState('');
+  const [canTransfer, setCanTransfer] = useState(false);
+  const [showTransferModal, setShowTransferModal] = useState(false);
+  const [teamMembers, setTeamMembers] = useState<TeamMember[]>([]);
+  const [selectedMember, setSelectedMember] = useState('');
+  const [transferLoading, setTransferLoading] = useState(false);
 
   useEffect(() => {
     let mounted = true;
+    
     const loadData = async () => {
       try {
+        const userRes = await fetch('/api/user');
+        if (userRes.ok) {
+          const userData = await userRes.json();
+          if (mounted) {
+            setCurrentUserEmail(userData.email);
+            const hasTransferPermission = TRANSFER_EXCEPTIONS.includes(userData.email);
+            setCanTransfer(hasTransferPermission);
+            
+            if (hasTransferPermission) {
+              try {
+                const members = getAllTeamMembers();
+                setTeamMembers(members);
+              } catch (err) {
+                console.warn('Failed to load team members', err);
+              }
+            }
+          }
+        }
+  
         const { id } = await params;
-        
         const res = await fetch(`/api/hr/${id}`);
         if (!res.ok) throw new Error('Failed to load');
         const data = await res.json();
-
+  
         if (!mounted) return;
-
-        setFormData(data);
+  
+        let updated = { ...data } as Partial<HRContact>;
+        const memberEmail = (data.member_email || '').toString();
+        if ((!data.incharge || !data.incharge_email) && memberEmail) {
+          try {
+            const team = getTeamDataByEmail(memberEmail);
+            if (team) {
+              if (!updated.incharge) updated.incharge = team.incharge;
+              if (!updated.incharge_email) updated.incharge_email = team.inchargeEmail;
+            }
+          } catch (err) {
+            console.warn('Team lookup failed', err);
+          }
+        }
+  
+        setFormData(updated);
         
         if (data.callback_date) {
           setSelectedDate(data.callback_date);
@@ -73,6 +127,7 @@ export default function HREditPage({ params }: { params: Promise<{ id: string }>
         setError('Failed to load HR record');
       }
     };
+    
     loadData();
     return () => {
       mounted = false;
@@ -126,6 +181,52 @@ export default function HREditPage({ params }: { params: Promise<{ id: string }>
     setShowDatePicker(false);
   };
 
+  const handleTransfer = async () => {
+    if (!selectedMember) {
+      alert('Please select a team member to transfer to');
+      return;
+    }
+
+    const member = teamMembers.find(m => m.email === selectedMember);
+    if (!member) {
+      alert('Invalid team member selected');
+      return;
+    }
+
+    if (!confirm(`Are you sure you want to transfer this HR contact to ${member.name}?`)) {
+      return;
+    }
+
+    setTransferLoading(true);
+    try {
+      const { id } = await params;
+      const transferData = {
+        ...formData,
+        member_name: member.name,
+        member_email: member.email,
+        incharge: member.incharge,
+        incharge_email: member.inchargeEmail,
+      };
+
+      const res = await fetch(`/api/hr/${id}`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(transferData),
+      });
+
+      if (!res.ok) throw new Error('Transfer failed');
+
+      alert(`Successfully transferred to ${member.name}`);
+      setFormData(transferData);
+      setShowTransferModal(false);
+      setSelectedMember('');
+    } catch (err) {
+      alert(err instanceof Error ? err.message : 'Transfer failed');
+    } finally {
+      setTransferLoading(false);
+    }
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
@@ -137,15 +238,15 @@ export default function HREditPage({ params }: { params: Promise<{ id: string }>
     
     setLoading(true);
     setError('');
-
+  
     try {
-      const { id } = await params;
-      const res = await fetch(`/api/hr/${id}`, {
+      const { id } = await params; 
+      const res = await fetch(`/api/hr/${id}`, { 
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(formData),
       });
-
+  
       if (!res.ok) throw new Error('Failed to update');
       
       if (formData.status === 'Call Postponed' && formData.callback_date) {
@@ -153,31 +254,31 @@ export default function HREditPage({ params }: { params: Promise<{ id: string }>
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
-            contact_id: id,
+            contact_id: id, 
             message: `Follow-up: ${formData.hr_name} – ${formData.company}`,
             callback_date: formData.callback_date,
           }),
         });
       }
       
-      router.push('/dashboard');
+      router.push(`/dashboard/hr/${id}`);  
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Update failed');
     } finally {
       setLoading(false);
     }
   };
-
+  
   const handleDelete = async () => {
     if (!confirm('Are you sure you want to delete this HR record?')) return;
-
+  
     setLoading(true);
     try {
-      const { id } = await params;
-      const res = await fetch(`/api/hr/${id}`, {
+      const { id } = await params;  
+      const res = await fetch(`/api/hr/${id}`, { 
         method: 'DELETE',
       });
-
+  
       if (!res.ok) throw new Error('Failed to delete');
       router.push('/dashboard');
     } catch (err) {
@@ -228,7 +329,17 @@ export default function HREditPage({ params }: { params: Promise<{ id: string }>
     <div className="p-6">
       <div className="max-w-5xl mx-auto">
         <div className="bg-card rounded-xl border border-border p-8">
-          <h1 className="text-3xl font-bold text-heading mb-8">Edit HR Record</h1>
+          <div className="flex justify-between items-center mb-8">
+            <h1 className="text-3xl font-bold text-heading">Edit HR Record</h1>
+            {canTransfer && (
+              <button
+                onClick={() => setShowTransferModal(true)}
+                className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded font-semibold transition"
+              >
+                Transfer Contact
+              </button>
+            )}
+          </div>
 
           {error && (
             <div className="mb-6 p-4 bg-red-900/30 border border-red-600 rounded text-red-400">
@@ -503,6 +614,62 @@ export default function HREditPage({ params }: { params: Promise<{ id: string }>
         </div>
       </div>
 
+      {/* Transfer Modal */}
+      {showTransferModal && (
+        <div className="fixed inset-0 bg-black/70 flex items-center justify-center z-50 p-4">
+          <div className="bg-card rounded-xl shadow-2xl max-w-md w-full p-6">
+            <h2 className="text-2xl font-bold text-heading mb-4">Transfer HR Contact</h2>
+            
+            <div className="mb-4 p-4 bg-muted rounded">
+              <p className="text-sm text-muted-foreground mb-1">Current Assignment</p>
+              <p className="font-semibold text-heading">{formData.member_name}</p>
+              <p className="text-sm text-foreground">{formData.member_email}</p>
+            </div>
+
+            <div className="mb-6">
+              <label className="block text-sm font-semibold text-heading mb-2">
+                Transfer to:
+              </label>
+              <select
+                value={selectedMember}
+                onChange={(e) => setSelectedMember(e.target.value)}
+                className="w-full px-3 py-2 bg-background border border-input rounded text-foreground focus:outline-none focus:ring-2 focus:ring-ring"
+              >
+                <option value="">Select a team member...</option>
+                {teamMembers
+                  .filter(member => member.email !== formData.member_email)
+                  .map((member) => (
+                    <option key={member.email} value={member.email}>
+                      {member.name} ({member.incharge})
+                    </option>
+                  ))}
+              </select>
+            </div>
+
+            <div className="flex gap-3">
+              <button
+                onClick={() => {
+                  setShowTransferModal(false);
+                  setSelectedMember('');
+                }}
+                disabled={transferLoading}
+                className="flex-1 px-4 py-2 border border-input rounded text-foreground hover:bg-accent font-semibold transition"
+              >
+                Cancel
+              </button>
+              <button
+                onClick={handleTransfer}
+                disabled={transferLoading || !selectedMember}
+                className="flex-1 bg-blue-600 hover:bg-blue-700 disabled:bg-muted disabled:cursor-not-allowed text-white px-4 py-2 rounded font-semibold transition"
+              >
+                {transferLoading ? 'Transferring...' : 'Transfer'}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Date Picker Modal */}
       {showDatePicker && (
         <div className="fixed inset-0 bg-black/70 flex items-center justify-center z-50 p-4">
           <div className="bg-card rounded-2xl shadow-2xl max-w-4xl w-full flex overflow-hidden">

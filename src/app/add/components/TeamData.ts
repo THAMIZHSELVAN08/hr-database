@@ -132,3 +132,32 @@ export function getTeamDataByEmail(email: string) {
   }
   return null;
 }
+
+export function getAllTeamMembers() {
+  const allMembers: Array<{
+    name: string;
+    email: string;
+    incharge: string;
+    inchargeEmail: string;
+  }> = [];
+
+  for (const team of TEAMS) {
+    for (const member of team.members) {
+      allMembers.push({
+        name: member.name,
+        email: member.email,
+        incharge: team.admin,
+        inchargeEmail: team.admin_email
+      });
+    }
+    
+    allMembers.push({
+      name: team.admin,
+      email: team.admin_email,
+      incharge: team.admin,
+      inchargeEmail: team.admin_email
+    });
+  }
+
+  return allMembers;
+}

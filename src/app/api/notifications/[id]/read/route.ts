@@ -12,7 +12,7 @@ interface UserPayload extends JwtPayload {
 
 export async function PUT(
   req: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   const token = req.cookies.get('token')?.value;
   if (!token) {
@@ -26,7 +26,9 @@ export async function PUT(
     return NextResponse.json({ error: 'Invalid token' }, { status: 401 });
   }
 
-  const id = Number(params.id);
+  const { id: idParam } = await params;
+  const id = Number(idParam);
+  
   if (isNaN(id)) {
     return NextResponse.json({ error: 'Invalid ID' }, { status: 400 });
   }

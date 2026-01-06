@@ -31,7 +31,7 @@ export async function GET(req: NextRequest) {
       [adminId]
     );
 
-    if (adminTeam.rowCount > 0) {
+    if (adminTeam.rowCount && adminTeam.rowCount > 0) {
       values.push(adminTeam.rows[0].team_id);
       filters.push(`h.team_id = $${values.length}`);
     }

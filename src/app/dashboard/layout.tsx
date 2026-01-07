@@ -29,13 +29,24 @@ export default async function DashboardLayout({
   };
 
   try {
-    const result = await db.query(
-      `
+    let statsQuery = `
       SELECT status, COUNT(*) as count
       FROM hr_contacts
-      GROUP BY status
-      `
-    );
+    `;
+    
+    const values: any[] = [];
+
+    if (user.role === 'member') {
+      statsQuery += ` WHERE uploaded_by = $1`;
+      values.push(user.id);
+    } else if (user.role === 'admin') {
+      statsQuery += ` WHERE team_id = $1`;
+      values.push(user.team_id);
+    }
+
+    statsQuery += ` GROUP BY status`;
+
+    const result = await db.query(statsQuery, values);
 
     result.rows.forEach((row: any) => {
       if (row.status in stats) {

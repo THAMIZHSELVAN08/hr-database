@@ -79,7 +79,7 @@ export default function TopBar({ username, stats }: TopBarProps) {
     return () => clearInterval(interval);
   }, []);
 
-  const allowedEmails = ['2023ee0724@svce.ac.in', '2023cs0051@svce.ac.in'];
+  const allowedEmails = ['2023ee0724@svce.ac.in', '2023cs0051@svce.ac.in','2023ee0705@svce.ac.in','2023ee0727@svce.ac.in', '2023cs0467@svce.ac.in','2023ec0578@svce.ac.in' , '2023ec0273@svce.ac.in'];
   const isRestricted = (userRole === 'admin' || userRole === 'super_admin') && 
                        !allowedEmails.includes(userEmail);
 

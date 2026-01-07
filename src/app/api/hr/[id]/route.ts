@@ -80,27 +80,88 @@ export async function PUT(
       address,
       callback_date,
       callback_time,
+      member_email,
     } = body;
 
-    const result = await db.query(
-      `UPDATE hr_contacts 
-       SET hr_name = $1, 
-           company = $2, 
-           email = $3, 
-           phone = $4, 
-           interview_mode = $5, 
-           status = $6, 
-           remark = $7,
-           hr_count = $8,
-           transport = $9,
-           internship = $10,
-           address = $11,
-           callback_date = $12,
-           callback_time = $13,
-           updated_at = NOW()
-       WHERE id = $14 
-       RETURNING *`,
-      [
+    let uploadedBy = null;
+    let teamId = null;
+    
+    if (member_email) {
+      const userResult = await db.query(
+        `SELECT id, team_id FROM users WHERE email = $1`,
+        [member_email]
+      );
+      
+      if (userResult.rows.length > 0) {
+        uploadedBy = userResult.rows[0].id;
+        teamId = userResult.rows[0].team_id;
+      }
+    }
+
+    let updateQuery;
+    let updateValues;
+    
+    if (uploadedBy && teamId) {
+      updateQuery = `
+        UPDATE hr_contacts 
+        SET hr_name = $1, 
+            company = $2, 
+            email = $3, 
+            phone = $4, 
+            interview_mode = $5, 
+            status = $6, 
+            remark = $7,
+            hr_count = $8,
+            transport = $9,
+            internship = $10,
+            address = $11,
+            callback_date = $12,
+            callback_time = $13,
+            uploaded_by = $14,
+            team_id = $15,
+            updated_at = NOW()
+        WHERE id = $16 
+        RETURNING *
+      `;
+      updateValues = [
+        hr_name,
+        company,
+        email,
+        phone,
+        interview_mode,
+        status,
+        remark,
+        hr_count || null,
+        transport || null,
+        internship || null,
+        address || null,
+        callback_date || null,
+        callback_time || null,
+        uploadedBy,
+        teamId,
+        id,
+      ];
+    } else {
+      updateQuery = `
+        UPDATE hr_contacts 
+        SET hr_name = $1, 
+            company = $2, 
+            email = $3, 
+            phone = $4, 
+            interview_mode = $5, 
+            status = $6, 
+            remark = $7,
+            hr_count = $8,
+            transport = $9,
+            internship = $10,
+            address = $11,
+            callback_date = $12,
+            callback_time = $13,
+            updated_at = NOW()
+        WHERE id = $14 
+        RETURNING *
+      `;
+      updateValues = [
         hr_name,
         company,
         email,
@@ -115,8 +176,10 @@ export async function PUT(
         callback_date || null,
         callback_time || null,
         id,
-      ]
-    );
+      ];
+    }
+
+    const result = await db.query(updateQuery, updateValues);
 
     if (result.rows.length === 0) {
       return NextResponse.json({ error: 'HR record not found' }, { status: 404 });

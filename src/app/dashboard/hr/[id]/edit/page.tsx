@@ -22,11 +22,15 @@ const INTERVIEW_MODES = ['Select Mode', 'Online', 'Offline', 'Both'];
 const TRANSPORT_OPTIONS = ['None', 'Own', 'Required'];
 const INTERNSHIP_OPTIONS = ['Yes', 'No'];
 
-// Define transfer exceptions - emails that have transfer permissions
+
 const TRANSFER_EXCEPTIONS: string[] = [
-  'admin@example.com',
-  'superadmin@example.com',
-  // Add your super admin emails here
+  '2023ee0724@svce.ac.in',
+  '2023cs0051@svce.ac.in',
+  '2023ee0705@svce.ac.in',
+  '2023ee0727@svce.ac.in',
+  '2023cs0467@svce.ac.in',
+  '2023ec0578@svce.ac.in',
+  '2023ec0273@svce.ac.in',
 ];
 
 type HRContact = {
@@ -147,7 +151,6 @@ export default function HREditPage({ params }: { params: Promise<{ id: string }>
     }
     
     if (name === 'hr_count') {
-      // Allow empty field while typing, otherwise clamp to at least 1
       if (value === '') {
         setFormData((prev) => ({ ...prev, hr_count: undefined }));
         return;
@@ -158,6 +161,24 @@ export default function HREditPage({ params }: { params: Promise<{ id: string }>
 
       setFormData((prev) => ({ ...prev, hr_count: safeValue }));
       return;
+    }
+
+    if (name === 'member_email' && value) {
+      try {
+        const team = getTeamDataByEmail(value);
+        if (team) {
+          setFormData((prev) => ({
+            ...prev,
+            member_email: value,
+            member_name: team.name,
+            incharge: team.incharge,
+            incharge_email: team.inchargeEmail,
+          }));
+          return;
+        }
+      } catch (err) {
+        console.warn('Team lookup failed', err);
+      }
     }
 
     setFormData((prev) => ({ ...prev, [name]: value }));
@@ -234,6 +255,9 @@ export default function HREditPage({ params }: { params: Promise<{ id: string }>
       setFormData(transferData);
       setShowTransferModal(false);
       setSelectedMember('');
+      
+      router.push('/dashboard');
+      router.refresh();
     } catch (err) {
       alert(err instanceof Error ? err.message : 'Transfer failed');
     } finally {
@@ -442,8 +466,12 @@ export default function HREditPage({ params }: { params: Promise<{ id: string }>
                   type="text"
                   name="member_name"
                   value={formData.member_name || ''}
-                  className="w-full px-3 py-2 bg-muted border border-border rounded text-muted-foreground cursor-not-allowed"
-                  readOnly
+                  onChange={handleChange}
+                  className={canTransfer 
+                    ? "w-full px-3 py-2 bg-background border border-input rounded text-foreground focus:outline-none focus:ring-2 focus:ring-ring"
+                    : "w-full px-3 py-2 bg-muted border border-border rounded text-muted-foreground cursor-not-allowed"
+                  }
+                  readOnly={!canTransfer}
                 />
               </div>
             </div>
@@ -457,8 +485,12 @@ export default function HREditPage({ params }: { params: Promise<{ id: string }>
                   type="text"
                   name="incharge"
                   value={formData.incharge || ''}
-                  className="w-full px-3 py-2 bg-muted border border-border rounded text-muted-foreground cursor-not-allowed"
-                  readOnly
+                  onChange={handleChange}
+                  className={canTransfer 
+                    ? "w-full px-3 py-2 bg-background border border-input rounded text-foreground focus:outline-none focus:ring-2 focus:ring-ring"
+                    : "w-full px-3 py-2 bg-muted border border-border rounded text-muted-foreground cursor-not-allowed"
+                  }
+                  readOnly={!canTransfer}
                 />
               </div>
               <div>
@@ -570,8 +602,12 @@ export default function HREditPage({ params }: { params: Promise<{ id: string }>
                   type="email"
                   name="member_email"
                   value={formData.member_email || ''}
-                  className="w-full px-3 py-2 bg-muted border border-border rounded text-muted-foreground cursor-not-allowed"
-                  readOnly
+                  onChange={handleChange}
+                  className={canTransfer 
+                    ? "w-full px-3 py-2 bg-background border border-input rounded text-foreground focus:outline-none focus:ring-2 focus:ring-ring"
+                    : "w-full px-3 py-2 bg-muted border border-border rounded text-muted-foreground cursor-not-allowed"
+                  }
+                  readOnly={!canTransfer}
                 />
               </div>
               <div>
@@ -582,8 +618,12 @@ export default function HREditPage({ params }: { params: Promise<{ id: string }>
                   type="email"
                   name="incharge_email"
                   value={formData.incharge_email || ''}
-                  className="w-full px-3 py-2 bg-muted border border-border rounded text-muted-foreground cursor-not-allowed"
-                  readOnly
+                  onChange={handleChange}
+                  className={canTransfer 
+                    ? "w-full px-3 py-2 bg-background border border-input rounded text-foreground focus:outline-none focus:ring-2 focus:ring-ring"
+                    : "w-full px-3 py-2 bg-muted border border-border rounded text-muted-foreground cursor-not-allowed"
+                  }
+                  readOnly={!canTransfer}
                 />
               </div>
             </div>
@@ -629,7 +669,6 @@ export default function HREditPage({ params }: { params: Promise<{ id: string }>
         </div>
       </div>
 
-      {/* Transfer Modal */}
       {showTransferModal && (
         <div className="fixed inset-0 bg-black/70 flex items-center justify-center z-50 p-4">
           <div className="bg-card rounded-xl shadow-2xl max-w-md w-full p-6">
@@ -684,7 +723,6 @@ export default function HREditPage({ params }: { params: Promise<{ id: string }>
         </div>
       )}
 
-      {/* Date Picker Modal */}
       {showDatePicker && (
         <div className="fixed inset-0 bg-black/70 flex items-center justify-center z-50 p-4">
           <div className="bg-card rounded-2xl shadow-2xl max-w-4xl w-full flex overflow-hidden">

@@ -150,8 +150,8 @@ export default function AdminCharts({ data }: { data: any }) {
                   <Cell
                     key={i}
                     fill={COLORS[entry.status] ?? '#8884d8'}
-                    stroke="#0A0A0A"
-                    strokeWidth={3}
+                    stroke="#E5E7EB"
+                    strokeWidth={1}
                   />
                 ))}
               </Pie>
@@ -219,8 +219,8 @@ export default function AdminCharts({ data }: { data: any }) {
                     <Cell
                       key={i}
                       fill={colors[i % colors.length]}
-                      stroke="#0A0A0A"
-                      strokeWidth={3}
+                      stroke="#E5E7EB"
+                      strokeWidth={1}
                     />
                   );
                 })}

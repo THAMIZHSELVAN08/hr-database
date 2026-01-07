@@ -141,22 +141,19 @@ export function getAllTeamMembers() {
     inchargeEmail: string;
   }> = [];
 
+  const adminEmails = TEAMS.map(team => team.admin_email);
+
   for (const team of TEAMS) {
     for (const member of team.members) {
-      allMembers.push({
-        name: member.name,
-        email: member.email,
-        incharge: team.admin,
-        inchargeEmail: team.admin_email
-      });
+      if (!adminEmails.includes(member.email)) {
+        allMembers.push({
+          name: member.name,
+          email: member.email,
+          incharge: team.admin,
+          inchargeEmail: team.admin_email
+        });
+      }
     }
-    
-    allMembers.push({
-      name: team.admin,
-      email: team.admin_email,
-      incharge: team.admin,
-      inchargeEmail: team.admin_email
-    });
   }
 
   return allMembers;

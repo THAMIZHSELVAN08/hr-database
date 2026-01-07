@@ -1,6 +1,7 @@
 'use client';
 
 import React from 'react';
+import { useRouter } from 'next/navigation';
 import { STATUS_STYLES } from '@/lib/statusColors';
 
 interface Contact {
@@ -59,6 +60,16 @@ function highlightText(text: string, searchTerms: SearchTerms): React.ReactNode 
 }
 
 export default function HRTableWithHighlight({ contacts, searchTerms = {} }: HRTableProps) {
+  const router = useRouter();
+
+  const handleView = (contactId: number) => {
+    router.push(`/view/${contactId}`);
+  };
+
+  const handleEdit = (contactId: number) => {
+    router.push(`/edit/${contactId}`);
+  };
+
   if (contacts.length === 0) {
     return (
       <div className="rounded-xl border border-border bg-card p-8 text-center shadow-sm">
@@ -107,6 +118,9 @@ export default function HRTableWithHighlight({ contacts, searchTerms = {} }: HRT
               <th className="px-6 py-4 text-left text-xs font-semibold text-heading uppercase tracking-wider">
                 Mode
               </th>
+              <th className="px-6 py-4 text-left text-xs font-semibold text-heading uppercase tracking-wider">
+                Actions
+              </th>
             </tr>
           </thead>
           <tbody className="divide-y divide-border">
@@ -138,6 +152,54 @@ export default function HRTableWithHighlight({ contacts, searchTerms = {} }: HRT
                 </td>
                 <td className="px-6 py-4 text-sm text-card-foreground">
                   {contact.interview_mode}
+                </td>
+                <td className="px-6 py-4">
+                  <div className="flex items-center gap-2">
+                    <button
+                      onClick={() => handleView(contact.id)}
+                      className="p-2 rounded-lg bg-blue-600 hover:bg-blue-700 text-white transition-colors"
+                      title="View Contact"
+                    >
+                      <svg
+                        className="w-5 h-5"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
+                        />
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"
+                        />
+                      </svg>
+                    </button>
+                    <button
+                      onClick={() => handleEdit(contact.id)}
+                      className="p-2 rounded-lg bg-green-600 hover:bg-green-700 text-white transition-colors"
+                      title="Edit Contact"
+                    >
+                      <svg
+                        className="w-5 h-5"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"
+                        />
+                      </svg>
+                    </button>
+                  </div>
                 </td>
               </tr>
             ))}
